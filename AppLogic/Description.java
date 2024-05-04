@@ -4,7 +4,7 @@ public class Description {
                 // Complete Guide
 
     private String[] listOfCommands = { 
-        "\n                             Commands",
+        "\n                                Commands",
         "   -------------------------------------------------------------",
         "    /create  | start a new project",
         "             | hire an employee",

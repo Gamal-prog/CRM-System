@@ -6,23 +6,30 @@ public class Employee {
     private String name;
     private boolean status;
     private String position;
+    private int id;
     //private String[] listOfDevelopers; //For Resoures Manager
     //private String[] listOfProjects; //For Manager 
-    // Fpr Use Global Variable input
+
+    // For Use Global Variable input
     private Scanner input;
 
     // All Employees
     static int numberOfEmployee;
+    static int idOfEmployees;
     static {
         numberOfEmployee = 0;
+        idOfEmployees = -1;
     }
-    private void countOfEmployee(){ // Когда увольняю нужно до отнимать, но и доступ у метода другой должен быть
+    private void countOfEmployee(){
         numberOfEmployee++;
+        idOfEmployees++;
+    }
+    protected void countOfFireEmployee() {
+        numberOfEmployee--;
     }
 
     public Employee(Scanner scanner) {
         this.input = scanner;
-        // On staff
         this.status = true; // Employee is enrolled
         
         // Input
@@ -42,7 +49,9 @@ public class Employee {
 
         System.out.println("   ----------------------\n");
 
-        countOfEmployee();        
+        countOfEmployee(); 
+        
+        this.id = idOfEmployees;
     }
 
     // Available in class only
@@ -70,6 +79,7 @@ public class Employee {
 
     protected void fireOfEmployee() {
         status = false;
+        countOfFireEmployee();
     }
 
     // Getters
@@ -81,5 +91,26 @@ public class Employee {
     }
     public boolean getStatus() {
         return status;
+    }
+    public int getId() {
+        return id;
+    }
+
+    // Display Employee Info 
+    public void displayEmployee() {
+        System.out.println("\n       Employee Info");
+        System.out.println("   ----------------------");
+        System.out.println("    Id       | " + getId());
+        System.out.println("    ---------|----------");
+        System.out.println("    Name     | " + getName());
+        System.out.println("    ---------|----------");
+        System.out.println("    Position | " + getPosition());
+        System.out.println("    ---------|----------");
+        if (getStatus()) 
+            System.out.println("    Status   | Enrolled");
+        else
+            System.out.println("    Status   | Fire");
+        System.out.println("   ----------------------\n");
+        System.out.println("   Press 'Enter' to continue");
     }
 }
