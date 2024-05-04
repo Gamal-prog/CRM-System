@@ -20,11 +20,11 @@ public class Employee {
         numberOfEmployee = 0;
         idOfEmployees = -1;
     }
-    private void countOfEmployee(){
+    private void countOfEmployee() {
         numberOfEmployee++;
         idOfEmployees++;
     }
-    protected void countOfFireEmployee() {
+    private void countOfFireEmployee() {
         numberOfEmployee--;
     }
 
@@ -54,7 +54,7 @@ public class Employee {
         this.id = idOfEmployees;
     }
 
-    // Available in class only
+    // Validation of Data
     private boolean testOfCorrectness(String checking) {
         char n = checking.charAt(0);
 
@@ -77,7 +77,7 @@ public class Employee {
         }
     }
 
-    protected void fireOfEmployee() {
+    public void fireOfEmployee() {
         status = false;
         countOfFireEmployee();
     }
@@ -100,7 +100,7 @@ public class Employee {
     public void displayEmployee() {
         System.out.println("\n       Employee Info");
         System.out.println("   ----------------------");
-        System.out.println("    Id       | " + getId());
+        System.out.println("    ID       | " + getId());
         System.out.println("    ---------|----------");
         System.out.println("    Name     | " + getName());
         System.out.println("    ---------|----------");
