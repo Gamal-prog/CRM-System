@@ -72,17 +72,41 @@ public class Interaction {
                     // All Employees and Projects
 
     public void displayAllEmployees() {
-        System.out.println("\n      Employees");
+        System.out.println("\n             Managers");
         System.out.println("   ------------------------------");
         System.out.println("    ID  | Status   | Name ");
         System.out.println("    ----------------------------");
-        for (Employee e : listOfEmployee) {
+        for (Employee e : listOfManagers) {
             if (e.getStatus())
                 System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
                 System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
         }
         System.out.println("   ------------------------------");
+
+        System.out.println("\n         Resource Managers");
+        System.out.println("   ------------------------------");
+        System.out.println("    ID  | Status   | Name ");
+        System.out.println("    ----------------------------");
+        for (Employee e : listOfResourcesManagers) {
+            if (e.getStatus())
+                System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
+            else
+                System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
+        }
+        System.out.println("   ------------------------------");
+
+        System.out.println("\n            Developers");
+        System.out.println("   ------------------------------");
+        System.out.println("    ID  | Status   | Name ");
+        System.out.println("    ----------------------------");
+        for (Employee e : listOfDevelopers) {
+            if (e.getStatus())
+                System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
+            else
+                System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
+        }
+        System.out.println("   ------------------------------\n");
     }
     public void displayAllProjects() {
         System.out.println("\n      Projects");
