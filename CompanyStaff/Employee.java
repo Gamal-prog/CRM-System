@@ -109,7 +109,7 @@ public class Employee {
         if (getStatus()) 
             System.out.println("    Status   | Enrolled");
         else
-            System.out.println("    Status   | Fire");
+            System.out.println("    Status   | Fired");
         System.out.println("   ----------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }

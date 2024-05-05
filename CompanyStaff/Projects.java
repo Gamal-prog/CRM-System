@@ -6,8 +6,8 @@ public class Projects {
     private String name;
     private String description;
     private boolean status;
-    private String manager;
-    private String resourceManager;
+    private int manager;
+    private int resourceManager;
     private int id;
     // For Use Global Variable input
     private Scanner input;
@@ -32,12 +32,16 @@ public class Projects {
 
         // Input
         System.out.println("\n                Project");
-        System.out.println("   --------------------------------");
-        System.out.print("    Name        | ");
+        System.out.println("   ---------------------------------------");
+        System.out.print("    Name             | ");
         this.name = input.nextLine();
-        System.out.print("    Description | ");
+        System.out.print("    Description      | ");
         this.description = input.nextLine();
-        System.out.println("   --------------------------------\n");
+        System.out.print("    Manager          | ");
+        this.manager = input.nextInt();
+        System.out.print("    Resource Manager | ");
+        this.resourceManager = input.nextInt();
+        System.out.println("   ---------------------------------------\n");
 
         countOfProject();
 
@@ -59,10 +63,10 @@ public class Projects {
     public boolean getStatus() {
         return status;
     }
-    public String getManager() {
+    public int getManager() {
         return manager;
     }
-    public String getResourceManager() {
+    public int getResourceManager() {
         return resourceManager;
     }
     public int getId() {
@@ -71,19 +75,23 @@ public class Projects {
 
     // Display Project Info 
     public void displayProject() {
-        System.out.println("\n       Project Info");
-        System.out.println("   ----------------------");
-        System.out.println("    ID          | " + getId());
-        System.out.println("    ------------|-------");
-        System.out.println("    Name        | " + getName());
-        System.out.println("    ------------|-------");
-        System.out.println("    Description | " + getDescription());
-        System.out.println("    ------------|-------");
+        System.out.println("\n            Project Info");
+        System.out.println("   -----------------------------------");
+        System.out.println("    ID                  | " + getId());
+        System.out.println("    --------------------|------------");
+        System.out.println("    Name                | " + getName());
+        System.out.println("    --------------------|------------");
+        System.out.println("    Description         | " + getDescription());
+        System.out.println("    --------------------|------------");
+        System.out.println("    Manager ID          | " + getManager());
+        System.out.println("    --------------------|------------");
+        System.out.println("    Resource Manager ID | " + getResourceManager());
+        System.out.println("    --------------------|------------");
         if (getStatus())
-            System.out.println("    Status      | In progress");
+            System.out.println("    Status              | In progress");
         else
-            System.out.println("    Status      | Done");
-        System.out.println("   ----------------------\n");
+            System.out.println("    Status              | Done");
+        System.out.println("   -----------------------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }
 }

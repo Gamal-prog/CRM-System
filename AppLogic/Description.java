@@ -39,7 +39,7 @@ public class Description {
         "         --------------------------------------------------\n"
     };
     private String[] tutorial = {
-        "\n   Tutorial:",
+        "\n   Tutorial",
         "",
         "\n"
     };

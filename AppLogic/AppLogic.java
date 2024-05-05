@@ -27,7 +27,13 @@ public class AppLogic {
                     conection.setEmployee(new Employee(input));
                     break;
                 case "/create -p": // done
-                    conection.setProjects(new Projects(input));
+                    //conection.setProjects(new Projects(input));
+                    if(conection.checkResponsibles()) {
+                        conection.displayValiables();
+                        conection.setProjects(new Projects(input));
+                    }
+                    else 
+                        System.out.print("   ");
                     break;
                 case "/create rs -e":
                     //attache employee to employee
