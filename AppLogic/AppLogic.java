@@ -24,10 +24,25 @@ public class AppLogic {
             
             switch (command) {
                 case "/create -e": // done
-                    conection.setEmployee(new Employee(input));
+                    //conection.setEmployee(new Employee(input));
+                    conection.setEmployees(new Employee(input));
                     break;
-                case "/create -p": // done
-                    conection.setProjects(new Projects(input));
+                case "/create -p":
+                    
+                    if(conection.checkResponsibles()) {
+                        conection.displayM();
+                        conection.displayR();
+                        conection.setProjects(new Projects(input));
+                    }
+                    else
+                        System.out.print("   ");
+                    /* 
+                    Projects test = new Projects(conection);
+                    boolean check = test.checkResponsibles();
+                    if (check)
+                        conection.setProjects(new Projects(input, conection));
+                    test = null;
+                    */
                     break;
                 case "/create rs -e":
                     //attache employee to employee
@@ -38,12 +53,6 @@ public class AppLogic {
                 case "/display -e":
                     break;
                 case "/display -p":
-                    break;
-                case "/display -e -p":
-                    break;
-                case "/display -e id":
-                    break;
-                case "/display -p id":
                     break;
                 case "/exit": // done
                 case "End of the World":
@@ -62,24 +71,25 @@ public class AppLogic {
                     manual.displayExtensions();
                     break;
                 case "/status -e":
-                    System.out.print("\n      Employee Id: ");
+                    System.out.print("\n      Employee ID: ");
                     int specificEmployee = input.nextInt();
                     conection.getEmployee(specificEmployee).displayEmployee();
                     // Условие для проверки введенное число не больше или равно ID
+                    
                     break;
                 case "/status -p": 
-                    System.out.print("\n      Project Id: ");
+                    System.out.print("\n      Project ID: ");
                     int specificProject = input.nextInt();
                     // check ID
                     conection.getProjects(specificProject).displayProject();
                     break;
                 case "/status rm -e": //done
-                    System.out.print("\n      Employee Id: ");
+                    System.out.print("\n      Employee ID: ");
                     specificEmployee = input.nextInt();
                     conection.getEmployee(specificEmployee).fireOfEmployee();
                     break;
                 case "/status rm -p": //done
-                    System.out.print("\n      Project Id: ");
+                    System.out.print("\n      Project ID: ");
                     specificProject = input.nextInt();
                     conection.getProjects(specificProject).finishProject();
                     break;

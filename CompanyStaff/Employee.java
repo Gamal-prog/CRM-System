@@ -28,6 +28,9 @@ public class Employee {
         numberOfEmployee--;
     }
 
+    public Employee() {
+        
+    }
     public Employee(Scanner scanner) {
         this.input = scanner;
         this.status = true; // Employee is enrolled
@@ -109,7 +112,7 @@ public class Employee {
         if (getStatus()) 
             System.out.println("    Status   | Enrolled");
         else
-            System.out.println("    Status   | Fire");
+            System.out.println("    Status   | Fired");
         System.out.println("   ----------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }
