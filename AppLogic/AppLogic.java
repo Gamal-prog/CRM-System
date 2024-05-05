@@ -33,7 +33,7 @@ public class AppLogic {
                         conection.setProjects(new Projects(input));
                     }
                     else 
-                        System.out.print("   ");
+                        System.out.println();
                     break;
                 case "/create rs -e":
                     //attache employee to employee
@@ -42,14 +42,10 @@ public class AppLogic {
                     //attache employee to project
                     break;
                 case "/display -e":
+                    conection.displayAllEmployees();
                     break;
                 case "/display -p":
-                    break;
-                case "/display -e -p":
-                    break;
-                case "/display -e id":
-                    break;
-                case "/display -p id":
+                    conection.displayAllProjects();
                     break;
                 case "/exit": // done
                 case "End of the World":

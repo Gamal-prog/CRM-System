@@ -72,10 +72,30 @@ public class Interaction {
                     // All Employees and Projects
 
     public void displayAllEmployees() {
-
+        System.out.println("\n      Employees");
+        System.out.println("   ------------------------------");
+        System.out.println("    ID  | Status   | Name ");
+        System.out.println("    ----------------------------");
+        for (Employee e : listOfEmployee) {
+            if (e.getStatus())
+                System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
+            else
+                System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
+        }
+        System.out.println("   ------------------------------");
     }
     public void displayAllProjects() {
-
+        System.out.println("\n      Projects");
+        System.out.println("   ------------------------------------");
+        System.out.println("    ID  | Status   | Manager ID | Name ");
+        System.out.println("   ------------------------------");
+        for (Projects e : listOfProjects) {
+            if (e.getStatus()) 
+                System.out.printf("    %d  | Enrolled | %d          | %s\n", e.getId(), e.getManager(), e.getName());
+            else 
+                System.out.printf("    %d  | Fired    | %d          | %s\n", e.getId(), e.getManager(), e.getName());
+        }
+        System.out.println("   ------------------------------------");
     }
     
     public void displayValiables() {
@@ -84,18 +104,23 @@ public class Interaction {
         int valiableId;
         String valiableName;
         for (Employee e : listOfManagers) {
-            valiableId = e.getId();
-            valiableName = e.getName();
-            System.out.printf("    %d | %s\n", valiableId, valiableName);
+            if (e.getStatus()) {
+                valiableId = e.getId();
+                valiableName = e.getName();
+                System.out.printf("    %d | %s\n", valiableId, valiableName);
+            }
         }
         System.out.println("   -----------------------------"); 
 
         System.out.println("\n    Valiable Resource Managers");
         System.out.println("   -----------------------------");
         for (Employee e : listOfResourcesManagers) {
-            valiableId = e.getId();
-            valiableName = e.getName();
-            System.out.printf("    %d | %s\n", valiableId, valiableName);
+            if (e.getStatus()) {
+                valiableId = e.getId();
+                valiableName = e.getName();
+                System.out.printf("    %d | %s\n", valiableId, valiableName);
+            }
+            
         }
         System.out.println("   -----------------------------");
     }
