@@ -69,24 +69,26 @@ public class AppLogic {
                 case "/status -e":
                     System.out.print("\n      Employee ID: ");
                     int specificEmployee = input.nextInt();
-                    conection.getEmployee(specificEmployee).displayEmployee();
-                    // Условие для проверки введенное число не больше или равно ID
+                    if (conection.checkID(specificEmployee, 1))
+                        conection.getEmployee(specificEmployee).displayEmployee();
                     break;
                 case "/status -p": 
                     System.out.print("\n      Project ID: ");
                     int specificProject = input.nextInt();
-                    // check ID
-                    conection.getProjects(specificProject).displayProject();
+                    if (conection.checkID(specificProject, 2))
+                        conection.getProjects(specificProject).displayProject();
                     break;
                 case "/status rm -e": //done
                     System.out.print("\n      Employee ID: ");
                     specificEmployee = input.nextInt();
-                    conection.getEmployee(specificEmployee).fireOfEmployee();
+                    if (conection.checkID(specificEmployee, 1))
+                        conection.getEmployee(specificEmployee).fireOfEmployee();
                     break;
                 case "/status rm -p": //done
                     System.out.print("\n      Project ID: ");
                     specificProject = input.nextInt();
-                    conection.getProjects(specificProject).finishProject();
+                    if (conection.checkID(specificProject, 2))
+                        conection.getProjects(specificProject).finishProject();
                     break;
                 case "/status rm -e -p":
                     // remove employee from project

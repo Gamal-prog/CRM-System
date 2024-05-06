@@ -69,6 +69,48 @@ public class Interaction {
         else
             return false;
     }
+    public boolean checkID(int id, int n) {
+        switch (n) {
+            case 1:
+            if (listOfEmployee.isEmpty()) 
+            {
+                System.out.println("\n      There aren't employees in company!\n");
+                System.err.println("   Press 'Enter' to continue");
+                return false;
+            }
+            else 
+            {
+                if (id < listOfEmployee.size()) 
+                {
+                    return true;
+                }
+                else {
+                    System.out.println("\n      Entered ID doesn't exit!\n");
+                    System.err.println("   Press 'Enter' to continue");
+                    return false;
+                }
+            }
+            default:
+                if (listOfProjects.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't employees in company!\n");
+                    System.err.println("   Press 'Enter' to continue");
+                    return false;
+                }
+                else 
+                {
+                    if (id < listOfProjects.size()) 
+                    {
+                        return true;
+                    }
+                    else {
+                        System.out.println("\n      Entered ID doesn't exit!\n");
+                        System.err.println("   Press 'Enter' to continue");
+                        return false;
+                    }
+                }
+        }
+    }
                     // All Employees and Projects
 
     public void displayAllEmployees() {
