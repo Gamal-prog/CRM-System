@@ -1,14 +1,16 @@
 package CompanyStaff;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Employee {
     private String name;
     private boolean status;
     private String position;
     private int id;
-    //private String[] listOfDevelopers; //For Resoures Manager
-    //private String[] listOfProjects; //For Manager 
+    private ArrayList<Integer> listOfDevelopers; //For Resoures Manager
+    private int projectID; //For Resoures Manager
+    private ArrayList<Integer> listOfProjects; //For Manager & Developers
 
     // For Use Global Variable input
     private Scanner input;
@@ -52,6 +54,9 @@ public class Employee {
         countOfEmployee(); 
         
         this.id = idOfEmployees;
+
+        this.listOfDevelopers = new ArrayList<Integer>();
+        this.listOfProjects = new ArrayList<Integer>();
     }
 
     // Validation of Data
@@ -95,6 +100,27 @@ public class Employee {
     public int getId() {
         return id;
     }
+    public int getProjectID() {
+        return projectID;
+    }
+    public ArrayList<Integer> getProjects() {
+        return listOfProjects;
+    }
+    public ArrayList<Integer> getDevs() {
+        return listOfDevelopers;
+    }
+
+    // Setters
+    public void setProjects(int id, int index) {
+        listOfProjects.add(index, id);
+    }
+    public void setDevelopers(int id, int index) {
+        listOfDevelopers.add(index, id);
+    }
+    public void setProjectID(int id) {
+        this.projectID = id;
+    }
+
 
     // Display Employee Info 
     public void displayEmployee() {
