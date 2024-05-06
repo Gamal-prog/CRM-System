@@ -35,13 +35,19 @@ public class Employee {
         // Input
         System.out.println("\n          Employee");
         System.out.println("   ----------------------");
-        System.out.print("    Name     | ");
-        this.name = input.nextLine();
-
         boolean resultOfChecking;
+        String checking;
+        do {
+            System.out.print("    Name     | ");
+            checking = input.nextLine();
+
+            resultOfChecking = checkLength(checking);
+
+        } while(resultOfChecking);
+
         do {
             System.out.print("    Position | ");
-            String checking = input.nextLine();
+            checking = input.nextLine();
 
             resultOfChecking = testOfCorrectness(checking);
             
@@ -53,7 +59,6 @@ public class Employee {
         
         this.id = idOfEmployees;
     }
-
     // Validation of Data
     private boolean testOfCorrectness(String checking) {
         char n = checking.charAt(0);
@@ -72,9 +77,21 @@ public class Employee {
                 this.position = "Resources manager";
                 return false;
             default:
-                System.out.println("\n   Please, enter a corect position! \n");
+                System.out.println("\n      Please, enter a corect position! \n");
                 return true;
         }
+    }
+    private boolean checkLength(String line) {
+        if (line.length() < 16) 
+                {
+                    this.name = line;
+                    return false;
+                }
+                else 
+                {
+                    System.out.println("\n      Length of name should be less than 21 symbols!\n");
+                    return true;
+                }
     }
 
     public void fireOfEmployee() {

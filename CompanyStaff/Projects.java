@@ -33,10 +33,25 @@ public class Projects {
         // Input
         System.out.println("\n                Project");
         System.out.println("   ---------------------------------------");
-        System.out.print("    Name             | ");
-        this.name = input.nextLine();
-        System.out.print("    Description      | ");
-        this.description = input.nextLine();
+
+        boolean resultOfChecking;
+        String checking;
+        do {
+            System.out.print("    Name             | ");
+            checking = input.nextLine();
+
+            resultOfChecking = checkLength(checking, "Name");
+
+        } while (resultOfChecking);
+
+        do {
+            System.out.print("    Description      | ");
+            checking = input.nextLine();
+
+            resultOfChecking = checkLength(checking, "Description");
+
+        } while (resultOfChecking);
+
         System.out.print("    Manager          | ");
         this.manager = input.nextInt();
         System.out.print("    Resource Manager | ");
@@ -46,6 +61,36 @@ public class Projects {
         countOfProject();
 
         this.id = idOfProjects;
+    }
+    // Validation of Data
+    private boolean checkLength(String line, String type) {
+        
+        switch (type) {
+            case "Name":
+                if (line.length() < 21) 
+                {
+                    this.name = line;
+                    return false;
+                }
+                else 
+                {
+                    System.out.println("\n      Length of name should be less than 21 symbols!\n");
+                    return true;
+                }
+            case "Description":
+                if (line.length() < 51) 
+                {
+                    this.description = line;
+                    return false;
+                }
+                else 
+                {
+                    System.out.println("\n      Length of description should be less than 51 symbols!\n");
+                    return true;
+                }
+            default:
+                return true;
+        }
     }
 
     public void finishProject() {
