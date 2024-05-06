@@ -90,10 +90,10 @@ public class Interaction {
                     return false;
                 }
             }
-            default:
+            case 2:
                 if (listOfProjects.isEmpty()) 
                 {
-                    System.out.println("\n      There aren't employees in company!\n");
+                    System.out.println("\n      There aren't projects in company!\n");
                     System.err.println("   Press 'Enter' to continue");
                     return false;
                 }
@@ -105,6 +105,44 @@ public class Interaction {
                     }
                     else {
                         System.out.println("\n      Entered ID doesn't exit!\n");
+                        System.err.println("   Press 'Enter' to continue");
+                        return false;
+                    }
+                }
+            case 3:
+                if (listOfEmployee.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't employees in company!\n");
+                    System.err.println("   Press 'Enter' to continue");
+                    return false;
+                }
+                else 
+                {
+                    if (getEmployee(id).getStatus()) 
+                    {
+                        return true;
+                    }
+                    else {
+                        System.out.println("\n      This employee is already fired!\n");
+                        System.err.println("   Press 'Enter' to continue");
+                        return false;
+                    }
+                }
+            default:
+                if (listOfProjects.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't projects in company!\n");
+                    System.err.println("   Press 'Enter' to continue");
+                    return false;
+                }
+                else 
+                {
+                    if (getProjects(id).getStatus()) 
+                    {
+                        return true;
+                    }
+                    else {
+                        System.out.println("\n      This project is already done!\n");
                         System.err.println("   Press 'Enter' to continue");
                         return false;
                     }

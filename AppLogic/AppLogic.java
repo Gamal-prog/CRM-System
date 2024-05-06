@@ -82,13 +82,15 @@ public class AppLogic {
                     System.out.print("\n      Employee ID: ");
                     specificEmployee = input.nextInt();
                     if (conection.checkID(specificEmployee, 1))
-                        conection.getEmployee(specificEmployee).fireOfEmployee();
+                        if (conection.checkID(specificEmployee, 3))
+                            conection.getEmployee(specificEmployee).fireOfEmployee();
                     break;
                 case "/status rm -p": //done
                     System.out.print("\n      Project ID: ");
                     specificProject = input.nextInt();
                     if (conection.checkID(specificProject, 2))
-                        conection.getProjects(specificProject).finishProject();
+                        if (conection.checkID(specificProject, 4))
+                            conection.getProjects(specificProject).finishProject();
                     break;
                 case "/status rm -e -p":
                     // remove employee from project
