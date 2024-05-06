@@ -27,18 +27,21 @@ public class AppLogic {
                     conection.setEmployee(new Employee(input));
                     break;
                 case "/create -p": // done
-                    //conection.setProjects(new Projects(input));
-                    if(conection.checkResponsibles()) {
-                        conection.displayValiables();
+                    if(conection.checkResponsibles()) 
+                    {
+                        conection.displayValiables(1);
+                        conection.displayValiables(2);
                         conection.setProjects(new Projects(input));
                     }
-                    else 
-                        System.out.println();
                     break;
                 case "/create rs -e":
+                    conection.displayValiables(2);
+                    conection.displayValiables(3);
                     //attache employee to employee
                     break;
                 case "/create rs -p":
+                    conection.displayValiables(4);
+                    conection.displayValiables(3);
                     //attache employee to project
                     break;
                 case "/display -e":
@@ -64,24 +67,24 @@ public class AppLogic {
                     manual.displayExtensions();
                     break;
                 case "/status -e":
-                    System.out.print("\n      Employee Id: ");
+                    System.out.print("\n      Employee ID: ");
                     int specificEmployee = input.nextInt();
                     conection.getEmployee(specificEmployee).displayEmployee();
                     // Условие для проверки введенное число не больше или равно ID
                     break;
                 case "/status -p": 
-                    System.out.print("\n      Project Id: ");
+                    System.out.print("\n      Project ID: ");
                     int specificProject = input.nextInt();
                     // check ID
                     conection.getProjects(specificProject).displayProject();
                     break;
                 case "/status rm -e": //done
-                    System.out.print("\n      Employee Id: ");
+                    System.out.print("\n      Employee ID: ");
                     specificEmployee = input.nextInt();
                     conection.getEmployee(specificEmployee).fireOfEmployee();
                     break;
                 case "/status rm -p": //done
-                    System.out.print("\n      Project Id: ");
+                    System.out.print("\n      Project ID: ");
                     specificProject = input.nextInt();
                     conection.getProjects(specificProject).finishProject();
                     break;

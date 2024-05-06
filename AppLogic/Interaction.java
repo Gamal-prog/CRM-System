@@ -76,7 +76,8 @@ public class Interaction {
         System.out.println("   ------------------------------");
         System.out.println("    ID  | Status   | Name ");
         System.out.println("    ----------------------------");
-        for (Employee e : listOfManagers) {
+        for (Employee e : listOfManagers) 
+        {
             if (e.getStatus())
                 System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
@@ -88,7 +89,8 @@ public class Interaction {
         System.out.println("   ------------------------------");
         System.out.println("    ID  | Status   | Name ");
         System.out.println("    ----------------------------");
-        for (Employee e : listOfResourcesManagers) {
+        for (Employee e : listOfResourcesManagers) 
+        {
             if (e.getStatus())
                 System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
@@ -100,7 +102,8 @@ public class Interaction {
         System.out.println("   ------------------------------");
         System.out.println("    ID  | Status   | Name ");
         System.out.println("    ----------------------------");
-        for (Employee e : listOfDevelopers) {
+        for (Employee e : listOfDevelopers) 
+        {
             if (e.getStatus())
                 System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
@@ -113,39 +116,78 @@ public class Interaction {
         System.out.println("   ------------------------------------");
         System.out.println("    ID  | Status   | Manager ID | Name ");
         System.out.println("   ------------------------------");
-        for (Projects e : listOfProjects) {
-            if (e.getStatus()) 
-                System.out.printf("    %d  | Enrolled | %d          | %s\n", e.getId(), e.getManager(), e.getName());
+        for (Projects p : listOfProjects) 
+        {
+            if (p.getStatus()) 
+                System.out.printf("    %d  | Enrolled | %d          | %s\n", p.getId(), p.getManager(), p.getName());
             else 
-                System.out.printf("    %d  | Fired    | %d          | %s\n", e.getId(), e.getManager(), e.getName());
+                System.out.printf("    %d  | Fired    | %d          | %s\n", p.getId(), p.getManager(), p.getName());
         }
         System.out.println("   ------------------------------------");
     }
     
-    public void displayValiables() {
-        System.out.println("\n          Valiable Managers");
-        System.out.println("   -----------------------------");
+    public void displayValiables(int n) {
         int valiableId;
         String valiableName;
-        for (Employee e : listOfManagers) {
-            if (e.getStatus()) {
-                valiableId = e.getId();
-                valiableName = e.getName();
-                System.out.printf("    %d | %s\n", valiableId, valiableName);
-            }
+        switch(n) {
+            case 1:
+                System.out.println("\n          Valiable Managers");
+                System.out.println("   -----------------------------");
+                for (Employee e : listOfManagers) 
+                {
+                    if (e.getStatus()) 
+                    {
+                        valiableId = e.getId();
+                        valiableName = e.getName();
+                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                    }
+                }
+                System.out.println("   -----------------------------"); 
+                break;
+            case 2: 
+                System.out.println("\n    Valiable Resource Managers");
+                System.out.println("   -----------------------------");
+                for (Employee e : listOfResourcesManagers) 
+                {
+                    if (e.getStatus()) 
+                    {
+                        valiableId = e.getId();
+                        valiableName = e.getName();
+                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                    }
+                    
+                }
+                System.out.println("   -----------------------------");
+                break;
+            case 3: 
+                System.out.println("\n        Valiable Developers");
+                System.out.println("   -----------------------------");
+                for (Employee e : listOfDevelopers) 
+                {
+                    if (e.getStatus()) 
+                    {
+                        valiableId = e.getId();
+                        valiableName = e.getName();
+                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                    }
+                }
+                System.out.println("   -----------------------------"); 
+                break;
+            default:
+                System.out.println("\n          Valiable Projects");
+                System.out.println("   -----------------------------");
+                for (Projects p : listOfProjects) 
+                {
+                    if (p.getStatus()) 
+                    {
+                        valiableId = p.getId();
+                        valiableName = p.getName();
+                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                    }
+                    
+                }
+                System.out.println("   -----------------------------\n");
+                break;
         }
-        System.out.println("   -----------------------------"); 
-
-        System.out.println("\n    Valiable Resource Managers");
-        System.out.println("   -----------------------------");
-        for (Employee e : listOfResourcesManagers) {
-            if (e.getStatus()) {
-                valiableId = e.getId();
-                valiableName = e.getName();
-                System.out.printf("    %d | %s\n", valiableId, valiableName);
-            }
-            
-        }
-        System.out.println("   -----------------------------");
     }
 }
