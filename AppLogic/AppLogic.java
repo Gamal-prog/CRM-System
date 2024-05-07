@@ -97,14 +97,16 @@ public class AppLogic {
                     break;
                 case "": // done
                     countOfEnterPushing++; 
-                    if (countOfEnterPushing == 3) {
+                    if (countOfEnterPushing == 3) 
+                    {
                         System.out.println("\n   Does not increase the working area, please!\n");
                         countOfEnterPushing = 0; 
                     }
                     break;
                 default:
                     countOfGarbagePushing++;
-                    if (countOfGarbagePushing == 2) {
+                    if (countOfGarbagePushing == 2) 
+                    {
                         System.out.println("\n   Does not garbage the working area, please!\n");
                         countOfGarbagePushing = 0;
                     } 

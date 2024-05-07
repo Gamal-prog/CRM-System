@@ -110,42 +110,24 @@ public class Interaction {
                     }
                 }
             case 3:
-                if (listOfEmployee.isEmpty()) 
+                if (getEmployee(id).getStatus()) 
                 {
-                    System.out.println("\n      There aren't employees in company!\n");
+                    return true;
+                }
+                else {
+                    System.out.println("\n      This employee is already fired!\n");
                     System.err.println("   Press 'Enter' to continue");
                     return false;
-                }
-                else 
-                {
-                    if (getEmployee(id).getStatus()) 
-                    {
-                        return true;
-                    }
-                    else {
-                        System.out.println("\n      This employee is already fired!\n");
-                        System.err.println("   Press 'Enter' to continue");
-                        return false;
-                    }
                 }
             default:
-                if (listOfProjects.isEmpty()) 
+                if (getProjects(id).getStatus()) 
                 {
-                    System.out.println("\n      There aren't projects in company!\n");
+                    return true;
+                }
+                else {
+                    System.out.println("\n      This project is already done!\n");
                     System.err.println("   Press 'Enter' to continue");
                     return false;
-                }
-                else 
-                {
-                    if (getProjects(id).getStatus()) 
-                    {
-                        return true;
-                    }
-                    else {
-                        System.out.println("\n      This project is already done!\n");
-                        System.err.println("   Press 'Enter' to continue");
-                        return false;
-                    }
                 }
         }
     }
