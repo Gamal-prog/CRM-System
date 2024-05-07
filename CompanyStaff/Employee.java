@@ -121,21 +121,50 @@ public class Employee {
         this.projectID = id;
     }
 
+    private void checkPosition() {
+        char n = position.charAt(0);
 
+        switch (n) {
+            case 'M':
+            case 'D':
+                if (!listOfProjects.isEmpty()) 
+                {
+                    System.out.println("    -----------|--------");
+                    for (int p : listOfProjects)
+                        System.out.printf("    Projects   | %d", p);
+                }
+                break;
+            case 'R':
+                if (!listOfDevelopers.isEmpty()) 
+                {
+                    System.out.println("    -----------|--------");
+                    for (int e : listOfDevelopers)
+                        System.out.printf("    Developer  | %d\n", e);
+                }  
+                break;
+            default:
+                break;
+        }
+    }
     // Display Employee Info 
     public void displayEmployee() {
         System.out.println("\n       Employee Info");
         System.out.println("   ----------------------");
-        System.out.println("    ID       | " + getId());
-        System.out.println("    ---------|----------");
-        System.out.println("    Name     | " + getName());
-        System.out.println("    ---------|----------");
-        System.out.println("    Position | " + getPosition());
-        System.out.println("    ---------|----------");
+        System.out.println("    ID         | " + getId());
+        System.out.println("    -----------|--------");
+        System.out.println("    Name       | " + getName());
+        System.out.println("    -----------|--------");
+        System.out.println("    Position   | " + getPosition());
+        System.out.println("    -----------|--------");
         if (getStatus()) 
-            System.out.println("    Status   | Enrolled");
-        else
-            System.out.println("    Status   | Fired");
+        {
+            System.out.println("    Status     | Enrolled");
+            checkPosition();
+        }
+        else 
+        {
+            System.out.println("    Status     | Fired");
+        }
         System.out.println("   ----------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }
