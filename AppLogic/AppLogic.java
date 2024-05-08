@@ -32,6 +32,7 @@ public class AppLogic {
                         conection.displayValiables(2);
                         conection.displayValiables(3);
                         conection.setProjects(new Projects(input));
+                        conection.setProjectIdForEmployees();
                     }
                     break;
                 case "/create rs -e":

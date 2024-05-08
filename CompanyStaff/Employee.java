@@ -111,11 +111,11 @@ public class Employee {
     }
 
     // Setters
-    public void setProjects(int id, int index) {
-        listOfProjects.add(index, id);
+    public void setProjects(int id) {
+        listOfProjects.add(id);
     }
-    public void setDevelopers(int id, int index) {
-        listOfDevelopers.add(index, id);
+    public void setDevelopers(int id) {
+        listOfDevelopers.add(id);
     }
     public void setProjectID(int id) {
         this.projectID = id;
@@ -129,17 +129,17 @@ public class Employee {
             case 'D':
                 if (!listOfProjects.isEmpty()) 
                 {
-                    System.out.println("    -----------|--------");
                     for (int p : listOfProjects)
-                        System.out.printf("    Projects   | %d", p);
+                        System.out.printf("    Project    | %d\n", p);
+                    System.out.println("    -----------|--------");
                 }
                 break;
             case 'R':
                 if (!listOfDevelopers.isEmpty()) 
                 {
-                    System.out.println("    -----------|--------");
                     for (int e : listOfDevelopers)
                         System.out.printf("    Developer  | %d\n", e);
+                    System.out.println("    -----------|--------");
                 }  
                 break;
             default:
@@ -156,15 +156,11 @@ public class Employee {
         System.out.println("    -----------|--------");
         System.out.println("    Position   | " + getPosition());
         System.out.println("    -----------|--------");
+        checkPosition();
         if (getStatus()) 
-        {
             System.out.println("    Status     | Enrolled");
-            checkPosition();
-        }
         else 
-        {
             System.out.println("    Status     | Fired");
-        }
         System.out.println("   ----------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }

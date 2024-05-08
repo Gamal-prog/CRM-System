@@ -85,21 +85,23 @@ public class Interaction {
             System.out.print("   ID: ");
             int developer = input.nextInt();
             devs[i] = developer;
-            getEmployee(resouceManager).setDevelopers(developer, i);
+            getEmployee(resouceManager).setDevelopers(developer);
         }
 
         int projectID = getEmployee(resouceManager).getProjectID();
         for (int i = 0; i < n; i++) {
-            //getEmployee(devs[i]).setProjects(projectID, getEmployee(devs[i]).getProjects().length);
-            getEmployee(devs[i]).setProjects(projectID, getEmployee(devs[i]).getProjects().size());
+            getEmployee(devs[i]).setProjects(projectID);
         }
-        /*
-        System.out.println("   R: \n   project ID " + getEmployee(resouceManager).getProjectID());
-        System.out.println("\n   Devs: " + getEmployee(resouceManager).getDevs());
-        System.out.println("\n   D ");
-        System.out.println(getEmployee(devs[0]).getId() + " " + getEmployee(devs[0]).getProjects());
-        System.out.println(getEmployee(devs[1]).getId() + " " + getEmployee(devs[1]).getProjects());
-        */
+    }
+
+    public void setProjectIdForEmployees() {
+        int size = listOfProjects.size() - 1;
+
+        int manager = listOfProjects.get(size).getManager();
+        listOfEmployee.get(manager).setProjects(size);
+
+        int resouceManager = listOfProjects.get(size).getResourceManager();
+        listOfEmployee.get(resouceManager).setProjectID(size);
     }
 
                     // All Employees and Projects
