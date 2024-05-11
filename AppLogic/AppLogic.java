@@ -74,12 +74,14 @@ public class AppLogic {
                     int specificEmployee = input.nextInt();
                     conection.getEmployee(specificEmployee).displayEmployee();
                     // Условие для проверки введенное число не больше или равно ID
+                    countOfEnterPushing = 0;
                     break;
                 case "/status -p": 
                     System.out.print("\n      Project ID: ");
                     int specificProject = input.nextInt();
                     // check ID
                     conection.getProjects(specificProject).displayProject();
+                    countOfEnterPushing = 0;
                     break;
                 case "/status rm -e": //done
                     System.out.print("\n      Employee ID: ");
@@ -94,23 +96,29 @@ public class AppLogic {
                 case "/status rm -e -p":
                     // remove employee from project
                     conection.removeEmployeeFromProject(input);
-                    break;
-                case "": // done
-                    countOfEnterPushing++; 
+                    break; 
+                case "": // done 
                     if (countOfEnterPushing == 3) 
                     {
                         System.out.println("\n   Does not increase the working area, please!\n");
                         countOfEnterPushing = 0; 
                     }
+                    else 
+                    {
+                        countOfEnterPushing++;
+                    }
                     break;
                 default:
-                    countOfGarbagePushing++;
-                    if (countOfGarbagePushing == 2) 
+                    if (countOfGarbagePushing == 3) 
                     {
                         System.out.println("\n   Does not garbage the working area, please!\n");
                         countOfGarbagePushing = 0;
                     } 
-                    countOfEnterPushing = 0; 
+                    else 
+                    {
+                        countOfGarbagePushing++;
+                    }
+                    break;
             }
         }
         while (loop);
