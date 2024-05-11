@@ -69,14 +69,16 @@ public class AppLogic {
                 case "/status -e":
                     System.out.print("\n      Employee ID: ");
                     int specificEmployee = input.nextInt();
-                    if (conection.checkID(specificEmployee, 1))
+                    if (conection.checkID(specificEmployee, 1)) 
                         conection.getEmployee(specificEmployee).displayEmployee();
+                    countOfEnterPushing = 0; 
                     break;
                 case "/status -p": 
                     System.out.print("\n      Project ID: ");
                     int specificProject = input.nextInt();
                     if (conection.checkID(specificProject, 2))
                         conection.getProjects(specificProject).displayProject();
+                    countOfEnterPushing = 0;
                     break;
                 case "/status rm -e": //done
                     System.out.print("\n      Employee ID: ");
@@ -84,6 +86,7 @@ public class AppLogic {
                     if (conection.checkID(specificEmployee, 1))
                         if (conection.checkID(specificEmployee, 3))
                             conection.getEmployee(specificEmployee).fireOfEmployee();
+                    countOfEnterPushing = 0;
                     break;
                 case "/status rm -p": //done
                     System.out.print("\n      Project ID: ");
@@ -91,26 +94,34 @@ public class AppLogic {
                     if (conection.checkID(specificProject, 2))
                         if (conection.checkID(specificProject, 4))
                             conection.getProjects(specificProject).finishProject();
+                    countOfEnterPushing = 0;
                     break;
                 case "/status rm -e -p":
                     // remove employee from project
+                    countOfEnterPushing = 0;
                     break;
                 case "": // done
-                    countOfEnterPushing++; 
                     if (countOfEnterPushing == 3) 
                     {
                         System.out.println("\n   Does not increase the working area, please!\n");
                         countOfEnterPushing = 0; 
                     }
+                    else 
+                    {
+                        countOfEnterPushing++; 
+                    }
                     break;
                 default:
-                    countOfGarbagePushing++;
                     if (countOfGarbagePushing == 2) 
                     {
                         System.out.println("\n   Does not garbage the working area, please!\n");
                         countOfGarbagePushing = 0;
-                    } 
-                    countOfEnterPushing = 0; 
+                    }  
+                    else 
+                    {
+                        countOfGarbagePushing++;
+                    }
+                    break;
             }
         }
         while (loop);
