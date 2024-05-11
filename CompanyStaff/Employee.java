@@ -82,14 +82,14 @@ public class Employee {
         }
     }
     private boolean checkLength(String line) {
-        if (line.length() < 16) 
+        if (line.length() > 2 && line.length() < 16) 
                 {
                     this.name = line;
                     return false;
                 }
                 else 
                 {
-                    System.out.println("\n      Length of name should be less than 21 symbols!\n");
+                    System.out.println("\n      Length of name should be less than 16 and more than 2 symbols!\n");
                     return true;
                 }
     }

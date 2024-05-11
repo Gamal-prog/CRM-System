@@ -67,25 +67,25 @@ public class Projects {
         
         switch (type) {
             case "Name":
-                if (line.length() < 21) 
+                if (line.length() > 4 && line.length() < 21) 
                 {
                     this.name = line;
                     return false;
                 }
                 else 
                 {
-                    System.out.println("\n      Length of name should be less than 21 symbols!\n");
+                    System.out.println("\n      Length of name should be less than 21 and more than 4 symbols!\n");
                     return true;
                 }
             case "Description":
-                if (line.length() < 51) 
+                if (line.length() > 14 && line.length() < 51) 
                 {
                     this.description = line;
                     return false;
                 }
                 else 
                 {
-                    System.out.println("\n      Length of description should be less than 51 symbols!\n");
+                    System.out.println("\n      Length of description should be less than 51 and more than 14 symbols!\n");
                     return true;
                 }
             default:
