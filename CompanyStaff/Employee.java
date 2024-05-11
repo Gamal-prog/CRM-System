@@ -87,6 +87,24 @@ public class Employee {
         countOfFireEmployee();
     }
 
+    public void removeDeveloper(int developer) {
+        int id;
+        for (int i = 0; i < listOfDevelopers.size(); i++) {
+            id = listOfDevelopers.get(i);
+            if (id == developer) 
+                listOfDevelopers.remove(i);
+                
+        }
+    }
+    public void removeProject(int project) {
+        int id;
+        for (int i = 0; i < listOfProjects.size(); i++) {
+            id = listOfProjects.get(i);
+            if (id == project)
+                listOfProjects.remove(i);
+        }
+    }
+
     // Getters
     public String getName() {
         return name;

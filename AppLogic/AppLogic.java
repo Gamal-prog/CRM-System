@@ -44,6 +44,7 @@ public class AppLogic {
                 case "/create rs -p":
                     conection.displayValiables(1);
                     conection.displayValiables(4);
+                    conection.relateToProject(input);
                     //attache employee to project
                     break;
                 case "/display -e": // done
@@ -92,6 +93,7 @@ public class AppLogic {
                     break;
                 case "/status rm -e -p":
                     // remove employee from project
+                    conection.removeEmployeeFromProject(input);
                     break;
                 case "": // done
                     countOfEnterPushing++; 

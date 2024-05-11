@@ -104,6 +104,35 @@ public class Interaction {
         listOfEmployee.get(resouceManager).setProjectID(size);
     }
 
+    public void relateToProject(Scanner input) {
+        System.out.print("\n   Project ID ");
+        int project = input.nextInt();
+
+        System.out.println("\n   Enter Developers ID in order!\n");
+        System.out.print("   Enter number of devs: ");
+        int n = input.nextInt();
+
+        int developer;
+        for (int i = 0; i < n; i++) {
+            System.out.print("   ID: ");
+            developer = input.nextInt();
+
+            getEmployee(getProjects(project).getResourceManager()).setDevelopers(developer);
+            getEmployee(developer).setProjects(project);
+        }
+    }
+
+    public void removeEmployeeFromProject(Scanner input) {
+        System.out.print("\n   Project ID ");
+        int project = input.nextInt();
+
+        System.out.print("\n   Enter Developer ID ");
+        int developer = input.nextInt();
+
+        getEmployee(getProjects(project).getResourceManager()).removeDeveloper(developer);
+        getEmployee(developer).removeProject(project);
+    }
+
                     // All Employees and Projects
 
     public void displayAllEmployees() {
