@@ -11,6 +11,8 @@ public class Projects {
     private int id;
     // For Use Global Variable input
     private Scanner input;
+    //
+    private final String indentation = "                ";
 
     // All Projects
     static int numberOfFinishProjects;
@@ -31,13 +33,13 @@ public class Projects {
         this.status = true; // In progress
 
         // Input
-        System.out.println("\n                Project");
-        System.out.println("   ---------------------------------------");
+        System.out.println("\n" + indentation + "                Project");
+        System.out.println(indentation + "-----------------------------------------");
 
         boolean resultOfChecking;
         String checking;
         do {
-            System.out.print("    Name             | ");
+            System.out.print(indentation + " Name             | ");
             checking = input.nextLine();
 
             resultOfChecking = checkLength(checking, "Name");
@@ -45,18 +47,18 @@ public class Projects {
         } while (resultOfChecking);
 
         do {
-            System.out.print("    Description      | ");
+            System.out.print(indentation + " Description      | ");
             checking = input.nextLine();
 
             resultOfChecking = checkLength(checking, "Description");
 
         } while (resultOfChecking);
 
-        System.out.print("    Manager          | ");
+        System.out.print(indentation + " Manager          | ");
         this.manager = input.nextInt();
-        System.out.print("    Resource Manager | ");
+        System.out.print(indentation + " Resource Manager | ");
         this.resourceManager = input.nextInt();
-        System.out.println("   ---------------------------------------\n");
+        System.out.println(indentation + "-----------------------------------------\n");
 
         countOfProject();
 
