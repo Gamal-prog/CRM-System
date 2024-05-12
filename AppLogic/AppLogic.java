@@ -35,20 +35,28 @@ public class AppLogic {
                     }
                     break;
                 case "/create rs -e":
-                    conection.displayValiables(2);
-                    conection.displayValiables(3);
-                    //attache employee to employee
+                    if (conection.checkResponsibles(1)) 
+                        if (conection.checkID(1)) 
+                        {
+                            conection.displayValiables(2);
+                            conection.displayValiables(3);
+                        }
                     break;
                 case "/create rs -p":
-                    conection.displayValiables(4);
-                    conection.displayValiables(3);
-                    //attache employee to project
+                    if (conection.checkResponsibles(2))
+                        if (conection.checkID(1)) 
+                        {
+                            conection.displayValiables(4);
+                            conection.displayValiables(3);
+                        }
                     break;
                 case "/display -e":
-                    conection.displayAllEmployees();
+                    if (conection.checkID(2)) 
+                        conection.displayAllEmployees();
                     break;
                 case "/display -p":
-                    conection.displayAllProjects();
+                    if (conection.checkID(3))
+                        conection.displayAllProjects();
                     break;
                 case "/exit": // done
                 case "End of the World":

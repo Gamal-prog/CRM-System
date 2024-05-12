@@ -10,7 +10,7 @@ public class Interaction {
     private ArrayList<Employee> listOfManagers;
     private ArrayList<Employee> listOfResourcesManagers;
     private ArrayList<Projects> listOfProjects;
-
+    //
     private final String indentation = "                     ";
     
     public Interaction() {
@@ -57,12 +57,14 @@ public class Interaction {
     public boolean checkResponsibles() {
         boolean checkManager = true;
         boolean checkResourceManager = true;
-        if (listOfManagers.isEmpty()) {
-            System.out.println("\n   You aren't able create project without a manager!\n");
+        if (listOfManagers.isEmpty()) 
+        {
+            System.out.println("\n      You aren't able create project without a manager!\n");
             checkManager = false;
         }
-        if (listOfResourcesManagers.isEmpty()) {
-            System.out.println("\n   You aren't able create project without a resource manager!\n");
+        if (listOfResourcesManagers.isEmpty()) 
+        {
+            System.out.println("\n      You aren't able create project without a resource manager!\n");
             checkResourceManager = false;
         }
             
@@ -133,6 +135,73 @@ public class Interaction {
                 }
         }
     }
+    public boolean checkID(int n) {
+        switch(n) {
+            case 1:
+                if (listOfDevelopers.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't developers in company!\n");
+                    return false;
+                }
+                else 
+                {
+                    if (listOfDevelopers.size() > 2) 
+                    {
+                        return true;
+                    }
+                    else 
+                    {
+                        System.out.println("\n      There aren't enough developers (min 3)!\n");
+                        return false;
+                    }
+                }
+            case 2:
+                if (listOfEmployee.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't employees in company!\n");
+                    return false;
+                }
+                else 
+                {
+                    return true;
+                }
+            default:
+                if (listOfProjects.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't projects in company!\n");
+                    return false;
+                }
+                else 
+                {
+                    return true;
+                }
+        }
+    }
+    public boolean checkResponsibles(int n) {
+        switch (n) {
+            case 1:
+                if (listOfResourcesManagers.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't resources managers in company!\n");
+                    return false;
+                }
+                else 
+                {
+                    return true;
+                }
+            default:
+                if (listOfProjects.isEmpty()) 
+                {
+                    System.out.println("\n      There aren't projects in company!\n");
+                    return false;
+                }
+                else 
+                {
+                    return true;
+                }
+        }
+    }
+
                     // All Employees and Projects
 
     public void displayAllEmployees() {
