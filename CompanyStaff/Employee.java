@@ -9,7 +9,7 @@ public class Employee {
     private int id;
     //private String[] listOfDevelopers; //For Resoures Manager
     //private String[] listOfProjects; //For Manager 
-
+    private final String indentation = "                     ";
     // For Use Global Variable input
     private Scanner input;
 
@@ -33,12 +33,13 @@ public class Employee {
         this.status = true; // Employee is enrolled
         
         // Input
-        System.out.println("\n          Employee");
-        System.out.println("   ----------------------");
+        System.out.println("\n" + indentation + "            Employee");
+        //System.out.print(indentation);
+        System.out.println(indentation + "------------------------------");
         boolean resultOfChecking;
         String checking;
         do {
-            System.out.print("    Name     | ");
+            System.out.print(indentation + " Name     | ");
             checking = input.nextLine();
 
             resultOfChecking = checkLength(checking);
@@ -46,14 +47,14 @@ public class Employee {
         } while(resultOfChecking);
 
         do {
-            System.out.print("    Position | ");
+            System.out.print(indentation + " Position | ");
             checking = input.nextLine();
 
             resultOfChecking = testOfCorrectness(checking);
             
         } while (resultOfChecking);
 
-        System.out.println("   ----------------------\n");
+        System.out.println(indentation + "------------------------------\n");
 
         countOfEmployee(); 
         

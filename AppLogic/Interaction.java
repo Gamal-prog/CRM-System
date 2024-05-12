@@ -10,6 +10,8 @@ public class Interaction {
     private ArrayList<Employee> listOfManagers;
     private ArrayList<Employee> listOfResourcesManagers;
     private ArrayList<Projects> listOfProjects;
+
+    private final String indentation = "                     ";
     
     public Interaction() {
         this.listOfEmployee = new ArrayList<Employee>();
@@ -134,44 +136,44 @@ public class Interaction {
                     // All Employees and Projects
 
     public void displayAllEmployees() {
-        System.out.println("\n             Managers");
-        System.out.println("   ------------------------------");
-        System.out.println("    ID  | Status   | Name ");
-        System.out.println("    ----------------------------");
+        System.out.println("\n" + indentation + "             Managers");
+        System.out.println(indentation + "----------------------------------");
+        System.out.println(indentation + " ID  | Status   | Name ");
+        System.out.println(indentation + " --------------------------------");
         for (Employee e : listOfManagers) 
         {
             if (e.getStatus())
-                System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
+                System.out.printf(indentation + "    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
-                System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
+                System.out.printf(indentation + "    %d   | Fired    | %s\n", e.getId(), e.getName());
         }
-        System.out.println("   ------------------------------");
+        System.out.println(indentation + "----------------------------------");
 
-        System.out.println("\n         Resource Managers");
-        System.out.println("   ------------------------------");
-        System.out.println("    ID  | Status   | Name ");
-        System.out.println("    ----------------------------");
+        System.out.println("\n" + indentation + "         Resource Managers");
+        System.out.println(indentation + "----------------------------------");
+        System.out.println(indentation + " ID  | Status   | Name ");
+        System.out.println(indentation + " --------------------------------");
         for (Employee e : listOfResourcesManagers) 
         {
             if (e.getStatus())
-                System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
+                System.out.printf(indentation + "    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
-                System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
+                System.out.printf(indentation + "    %d   | Fired    | %s\n", e.getId(), e.getName());
         }
-        System.out.println("   ------------------------------");
+        System.out.println(indentation + "----------------------------------");
 
-        System.out.println("\n            Developers");
-        System.out.println("   ------------------------------");
-        System.out.println("    ID  | Status   | Name ");
-        System.out.println("    ----------------------------");
+        System.out.println("\n" + indentation + "            Developers");
+        System.out.println(indentation + "----------------------------------");
+        System.out.println(indentation + " ID  | Status   | Name ");
+        System.out.println(indentation + " --------------------------------");
         for (Employee e : listOfDevelopers) 
         {
             if (e.getStatus())
-                System.out.printf("    %d   | Enrolled | %s\n", e.getId(), e.getName());
+                System.out.printf(indentation + "    %d   | Enrolled | %s\n", e.getId(), e.getName());
             else
-                System.out.printf("    %d   | Fired    | %s\n", e.getId(), e.getName());
+                System.out.printf(indentation + "    %d   | Fired    | %s\n", e.getId(), e.getName());
         }
-        System.out.println("   ------------------------------\n");
+        System.out.println(indentation + "----------------------------------\n");
     }
     public void displayAllProjects() {
         System.out.println("\n      Projects");
@@ -193,62 +195,62 @@ public class Interaction {
         String valiableName;
         switch(n) {
             case 1:
-                System.out.println("\n          Valiable Managers");
-                System.out.println("   -----------------------------");
+                System.out.println("\n" + indentation + "       Valiable Managers");
+                System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfManagers) 
                 {
                     if (e.getStatus()) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();
-                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                        System.out.printf(indentation + "    %d | %s\n", valiableId, valiableName);
                     }
                 }
-                System.out.println("   -----------------------------"); 
+                System.out.println(indentation + " ----------------------------"); 
                 break;
             case 2: 
-                System.out.println("\n    Valiable Resource Managers");
-                System.out.println("   -----------------------------");
+                System.out.println("\n" + indentation + "  Valiable Resource Managers");
+                System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfResourcesManagers) 
                 {
                     if (e.getStatus()) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();
-                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                        System.out.printf(indentation + "    %d | %s\n", valiableId, valiableName);
                     }
                     
                 }
-                System.out.println("   -----------------------------");
+                System.out.println(indentation + " ----------------------------");
                 break;
             case 3: 
-                System.out.println("\n        Valiable Developers");
-                System.out.println("   -----------------------------");
+                System.out.println("\n" + indentation + "      Valiable Developers");
+                System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfDevelopers) 
                 {
                     if (e.getStatus()) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();
-                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                        System.out.printf(indentation + "    %d | %s\n", valiableId, valiableName);
                     }
                 }
-                System.out.println("   -----------------------------"); 
+                System.out.println(indentation + " ----------------------------"); 
                 break;
             default:
-                System.out.println("\n          Valiable Projects");
-                System.out.println("   -----------------------------");
+                System.out.println("\n" + indentation + "       Valiable Projects");
+                System.out.println(indentation + " ----------------------------");
                 for (Projects p : listOfProjects) 
                 {
                     if (p.getStatus()) 
                     {
                         valiableId = p.getId();
                         valiableName = p.getName();
-                        System.out.printf("    %d | %s\n", valiableId, valiableName);
+                        System.out.printf(indentation + "    %d | %s\n", valiableId, valiableName);
                     }
                     
                 }
-                System.out.println("   -----------------------------\n");
+                System.out.println(indentation + " ----------------------------\n");
                 break;
         }
     }
