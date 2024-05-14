@@ -10,10 +10,11 @@ public class Projects {
     private int resourceManager;
     private int id;
     private boolean flag;
+    // Fianl Attributes
+    private final String indentation = "                ";
     // For Use Global Variable input
     private Scanner input;
-    //
-    private final String indentation = "                ";
+
 
     // For All Projects
     static int numberOfFinishProjects;

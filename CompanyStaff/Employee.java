@@ -11,6 +11,8 @@ public class Employee {
     private int numberOfActualProjects;
     // Fianl Attributes
     private final int MAX_NUMBER_OF_PROJETS_FOR_MANAGER = 3;
+    private final int MIN_LENGTH_OF_EMPLOYEE_NAME = 3;
+    private final int MAX_LENGTH_OF_EMPLOYEE_NAME = 15;
     private final String indentation = "                     ";
     // For Use Global Variable input
     private Scanner input;
@@ -34,24 +36,6 @@ public class Employee {
         countOfFireEmployee();
     }
 
-    //
-    public void countOfManagerProject(String action) {
-        switch (action) {
-            case "increase":
-                numberOfActualProjects++;
-                break;
-            case "decrease":
-                numberOfActualProjects--;
-                break;
-            default:
-                break;
-        }
-        if (numberOfActualProjects <= MAX_NUMBER_OF_PROJETS_FOR_MANAGER)
-            this.flag = false;
-        else 
-            this.flag = true;
-    }
-
     // Getters
     public String getName() {
         return name;
@@ -72,7 +56,7 @@ public class Employee {
         // NOTHING
         return numberOfActualProjects; // NOTHING
     }
-
+    
     // Setters
     public void setFlag(String employee, String action) {
         switch (employee) {
@@ -86,6 +70,22 @@ public class Employee {
             default:
                 break;
         }
+    }
+    public void countOfManagerProject(String action) {
+        switch (action) {
+            case "increase":
+                numberOfActualProjects++;
+                break;
+            case "decrease":
+                numberOfActualProjects--;
+                break;
+            default:
+                break;
+        }
+        if (numberOfActualProjects <= MAX_NUMBER_OF_PROJETS_FOR_MANAGER)
+            this.flag = false;
+        else 
+            this.flag = true;
     }
 
     public Employee(Scanner scanner) {
@@ -144,7 +144,7 @@ public class Employee {
         }
     }
     private boolean checkLength(String line) {
-        if (line.length() > 2 && line.length() < 16) 
+        if (line.length() >= MIN_LENGTH_OF_EMPLOYEE_NAME && line.length() < MAX_LENGTH_OF_EMPLOYEE_NAME) 
                 {
                     this.name = line;
                     return false;

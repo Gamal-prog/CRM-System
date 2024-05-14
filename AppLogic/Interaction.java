@@ -11,6 +11,7 @@ public class Interaction {
     private ArrayList<Employee> listOfResourcesManagers;
     private ArrayList<Projects> listOfProjects;
     //
+    //private final int MAX_NUMBER_OF_DEVELOPERS = 4;
     private final String indentation = "                     ";
     
     public Interaction() {
@@ -292,12 +293,27 @@ public class Interaction {
                 }
                 System.out.println(indentation + " ----------------------------");
                 break;
+            case 5: 
+                System.out.println("\n" + indentation + "  Valiable Resource Managers");
+                System.out.println(indentation + " ----------------------------");
+                for (Employee e : listOfResourcesManagers) 
+                {
+                    if (e.getStatus() && !e.getFlag() /* && ((max num of devs - listOFDevelopers.size()) > 0) */ ) 
+                    {
+                        valiableId = e.getId();
+                        valiableName = e.getName();
+                        System.out.printf(indentation + "    %d | %s\n", valiableId, valiableName);
+                    }
+                    
+                }
+                System.out.println(indentation + " ----------------------------");
+                break;
             case 3: 
                 System.out.println("\n" + indentation + "      Valiable Developers");
                 System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfDevelopers) 
                 {
-                    if (e.getStatus()) 
+                    if (e.getStatus() && !e.getFlag()) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();
@@ -311,7 +327,7 @@ public class Interaction {
                 System.out.println(indentation + " ----------------------------");
                 for (Projects p : listOfProjects) 
                 {
-                    if (p.getStatus()) 
+                    if (p.getStatus() && !p.getFlag()) 
                     {
                         valiableId = p.getId();
                         valiableName = p.getName();
