@@ -1,5 +1,6 @@
 package CompanyStaff;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Employee {
@@ -8,7 +9,11 @@ public class Employee {
     private String position;
     private int id;
     private boolean flag;
-    private int numberOfActualProjects;
+    private int numberOfActualProjects; // For Manager
+    //
+    private int projectID; //For Resoures Manager
+    private ArrayList<Integer> listOfDevelopers; //For Resoures Manager
+    private ArrayList<Integer> listOfProjects; //For Manager & Developers
     // Fianl Attributes
     private final int MAX_NUMBER_OF_PROJETS_FOR_MANAGER = 3;
     private final int MIN_LENGTH_OF_EMPLOYEE_NAME = 3;
@@ -56,7 +61,17 @@ public class Employee {
         // NOTHING
         return numberOfActualProjects; // NOTHING
     }
-    
+    public int getProjectID() {
+        return projectID;
+    }
+    public ArrayList<Integer> getProjects() {
+        return listOfProjects;
+    }
+    public ArrayList<Integer> getDevs() {
+        return listOfDevelopers;
+    }
+
+
     // Setters
     public void setFlag(String employee, String action) {
         switch (employee) {
@@ -65,7 +80,16 @@ public class Employee {
                 break;
             case "Resoures Manager":
             case "Developer":
-                this.flag = true;
+                switch (action) {
+                    case "work":
+                        this.flag = true;
+                        break;
+                    case "free":
+                        this.flag = false;
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
@@ -82,10 +106,20 @@ public class Employee {
             default:
                 break;
         }
-        if (numberOfActualProjects <= MAX_NUMBER_OF_PROJETS_FOR_MANAGER)
+        if (numberOfActualProjects < MAX_NUMBER_OF_PROJETS_FOR_MANAGER)
             this.flag = false;
         else 
             this.flag = true;
+    }
+    //
+    public void setProjects(int id) {
+        listOfProjects.add(id);
+    }
+    public void setDevelopers(int id) {
+        listOfDevelopers.add(id);
+    }
+    public void setProjectID(int id) {
+        this.projectID = id;
     }
 
     public Employee(Scanner scanner) {
@@ -119,6 +153,9 @@ public class Employee {
         countOfEmployee(); 
         
         this.id = idOfEmployees;
+
+        this.listOfDevelopers = new ArrayList<Integer>();
+        this.listOfProjects = new ArrayList<Integer>();
     }
 
     // Validation of Data

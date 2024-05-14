@@ -32,14 +32,16 @@ public class AppLogic {
                         conection.displayValiables(1);
                         conection.displayValiables(2);
                         conection.setProjects(new Projects(input));
+                        conection.setProjectIdForEmployees();
                     }
                     break;
                 case "/create rs -e":
                     if (conection.checkResponsibles(1)) 
                         if (conection.checkID(1)) 
                         {
-                            conection.displayValiables(2);
+                            conection.displayValiables(5);
                             conection.displayValiables(3);
+                            conection.relateToEmployee(input);
                         }
                     break;
                 case "/create rs -p":
@@ -48,6 +50,7 @@ public class AppLogic {
                         {
                             conection.displayValiables(4);
                             conection.displayValiables(3);
+                            conection.relateToProject(input);
                         }
                     break;
                 case "/display -e":

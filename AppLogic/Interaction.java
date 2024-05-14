@@ -1,6 +1,8 @@
 package AppLogic;
 // Java's Packages
 import java.util.ArrayList;
+import java.util.Scanner;
+
 // Custom Packages
 import CompanyStaff.*;
 
@@ -13,14 +15,6 @@ public class Interaction {
     //
     //private final int MAX_NUMBER_OF_DEVELOPERS = 4;
     private final String indentation = "                     ";
-    
-    public Interaction() {
-        this.listOfEmployee = new ArrayList<Employee>();
-        this.listOfDevelopers = new ArrayList<Employee>();
-        this.listOfManagers = new ArrayList<Employee>();
-        this.listOfResourcesManagers = new ArrayList<Employee>();
-        this.listOfProjects = new ArrayList<Projects>();
-    }
 
     // Setters
     public void setEmployee(Employee employee) {
@@ -55,7 +49,15 @@ public class Interaction {
         return listOfProjects.get(index);
     }
 
-    public boolean checkResponsibles() {
+    public Interaction() {
+        this.listOfEmployee = new ArrayList<Employee>();
+        this.listOfDevelopers = new ArrayList<Employee>();
+        this.listOfManagers = new ArrayList<Employee>();
+        this.listOfResourcesManagers = new ArrayList<Employee>();
+        this.listOfProjects = new ArrayList<Projects>();
+    }
+
+    public boolean checkResponsibles() { // Check Flag 
         boolean checkManager = true;
         boolean checkResourceManager = true;
         if (listOfManagers.isEmpty()) 
@@ -203,6 +205,56 @@ public class Interaction {
         }
     }
 
+    public void relateToEmployee(Scanner input) {
+        System.out.print("\n   Resouce Manager ID ");
+        int resouceManager = input.nextInt();
+
+        System.out.println("\n   Enter Developers ID in order!\n");
+        System.out.print("   Enter number of devs: ");
+        int n = input.nextInt();
+
+        int projectID = getEmployee(resouceManager).getProjectID();
+        for (int i = 0; i < n; i++) {
+            System.out.print("   ID: ");
+            int developer = input.nextInt();
+            getEmployee(resouceManager).setDevelopers(developer);
+            getEmployee(developer).setProjects(projectID);
+            getEmployee(developer).setFlag("Developer", "work");
+        }
+        getProjects(projectID).setFlag("has devs");
+    }
+    public void setProjectIdForEmployees() {
+        int size = listOfProjects.size() - 1;
+
+        int manager = listOfProjects.get(size).getManager();
+        listOfEmployee.get(manager).setProjects(size);
+        getEmployee(manager).setFlag("Manager", "increase");
+
+        int resouceManager = listOfProjects.get(size).getResourceManager();
+        listOfEmployee.get(resouceManager).setProjectID(size);
+        getEmployee(resouceManager).setFlag("Resoures Manager", "work");
+    }
+    public void relateToProject(Scanner input) {
+        System.out.print("\n   Project ID ");
+        int project = input.nextInt();
+
+        System.out.println("\n   Enter Developers ID in order!\n");
+        System.out.print("   Enter number of devs: ");
+        int n = input.nextInt();
+
+        int developer;
+        for (int i = 0; i < n; i++) {
+            System.out.print("   ID: ");
+            developer = input.nextInt();
+
+            int resourceManager = getProjects(project).getResourceManager();
+            getEmployee(resourceManager).setDevelopers(developer);
+            getEmployee(developer).setProjects(project);
+            getEmployee(developer).setFlag("Developer", "work");
+        }
+        getProjects(project).setFlag("has devs");
+    }
+
                     // All Employees and Projects
 
     public void displayAllEmployees() {
@@ -298,7 +350,7 @@ public class Interaction {
                 System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfResourcesManagers) 
                 {
-                    if (e.getStatus() && !e.getFlag() /* && ((max num of devs - listOFDevelopers.size()) > 0) */ ) 
+                    if (e.getStatus() && e.getFlag() && ((4 - e.getDevs().size()) > 0)) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();

@@ -58,8 +58,17 @@ public class Projects {
     }
 
     // Setters
-    public void setFlag() {
-        this.flag = true;
+    public void setFlag(String anction) {
+        switch (anction) {
+            case "has devs":
+                this.flag = true;
+                break;
+            case "has not devs":
+                this.flag = false;
+                break;
+            default:
+                break;
+        }
     }
 
     public Projects(Scanner scanner) {
