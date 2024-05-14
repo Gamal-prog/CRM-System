@@ -206,33 +206,51 @@ public class Interaction {
     }
 
     public void relateToEmployee(Scanner input) {
-        System.out.print("\n   Resouce Manager ID ");
+        System.out.print("\n   Resouce Manager ID: ");
         int resouceManager = input.nextInt();
 
         System.out.println("\n   Enter Developers ID in order!\n");
-        System.out.print("   Enter number of devs: ");
-        int n = input.nextInt();
 
+        int n = checkNumberOfEnteredDevs(input, resouceManager);
+
+        System.out.println("\n    Developer ID");
+        System.out.println("   --------------");
         int projectID = getEmployee(resouceManager).getProjectID();
         for (int i = 0; i < n; i++) {
-            System.out.print("   ID: ");
+            System.out.print("    ID | ");
             int developer = input.nextInt();
             getEmployee(resouceManager).setDevelopers(developer);
             getEmployee(developer).setProjects(projectID);
             getEmployee(developer).setFlag("Developer", "work");
         }
         getProjects(projectID).setFlag("has devs");
+        System.out.println("   --------------");
     }
-    public void setProjectIdForEmployees() {
-        int size = listOfProjects.size() - 1;
+    private int checkNumberOfEnteredDevs(Scanner input, int resouceManager) {
+        
+        int n = getEmployee(resouceManager).getDevs().size();
+        switch (n) {
+            case 0:
+                boolean resultOfChecking;
+                do {
+                    System.out.print("   Enter min 3 or max 4 developers ID: ");
+                    n = input.nextInt(); 
+                    
+                    resultOfChecking = (n > 2 && n < 5) ? false : true;
 
-        int manager = listOfProjects.get(size).getManager();
-        listOfEmployee.get(manager).setProjects(size);
-        getEmployee(manager).setFlag("Manager", "increase");
-
-        int resouceManager = listOfProjects.get(size).getResourceManager();
-        listOfEmployee.get(resouceManager).setProjectID(size);
-        getEmployee(resouceManager).setFlag("Resoures Manager", "work");
+                } while (resultOfChecking);
+                return n;
+            case 3:
+                System.out.println("   You can add only 1 developer!");
+                n = 1;
+                return n;
+            case 4:
+                System.out.println("   Number of devs is above the limit!\n   You cann't add devs to resouceManager");
+                n = 0;
+                return n;
+            default:
+                return 0;
+        }
     }
     public void relateToProject(Scanner input) {
         System.out.print("\n   Project ID ");
@@ -253,6 +271,17 @@ public class Interaction {
             getEmployee(developer).setFlag("Developer", "work");
         }
         getProjects(project).setFlag("has devs");
+    }
+    public void setProjectIdForEmployees() {
+        int size = listOfProjects.size() - 1;
+
+        int manager = listOfProjects.get(size).getManager();
+        listOfEmployee.get(manager).setProjects(size);
+        getEmployee(manager).setFlag("Manager", "increase");
+
+        int resouceManager = listOfProjects.get(size).getResourceManager();
+        listOfEmployee.get(resouceManager).setProjectID(size);
+        getEmployee(resouceManager).setFlag("Resoures Manager", "work");
     }
 
                     // All Employees and Projects

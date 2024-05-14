@@ -19,7 +19,6 @@ public class Projects {
     // For Use Global Variable input
     private Scanner input;
 
-
     // For All Projects
     static int numberOfFinishProjects;
     static int idOfProjects;
