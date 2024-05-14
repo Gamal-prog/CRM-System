@@ -268,7 +268,7 @@ public class Interaction {
                 System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfManagers) 
                 {
-                    if (e.getStatus()) 
+                    if (e.getStatus() && !e.getFlag()) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();
@@ -282,7 +282,7 @@ public class Interaction {
                 System.out.println(indentation + " ----------------------------");
                 for (Employee e : listOfResourcesManagers) 
                 {
-                    if (e.getStatus()) 
+                    if (e.getStatus() && !e.getFlag()) 
                     {
                         valiableId = e.getId();
                         valiableName = e.getName();

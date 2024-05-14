@@ -7,13 +7,15 @@ public class Employee {
     private boolean status;
     private String position;
     private int id;
-    //private String[] listOfDevelopers; //For Resoures Manager
-    //private String[] listOfProjects; //For Manager 
+    private boolean flag;
+    private int numberOfActualProjects;
+    // Fianl Attributes
+    private final int MAX_NUMBER_OF_PROJETS_FOR_MANAGER = 3;
     private final String indentation = "                     ";
     // For Use Global Variable input
     private Scanner input;
 
-    // All Employees
+    // For All Employees
     static int numberOfEmployee;
     static int idOfEmployees;
     static {
@@ -27,14 +29,72 @@ public class Employee {
     private void countOfFireEmployee() {
         numberOfEmployee--;
     }
+    public void fireOfEmployee() {
+        status = false;
+        countOfFireEmployee();
+    }
+
+    //
+    public void countOfManagerProject(String action) {
+        switch (action) {
+            case "increase":
+                numberOfActualProjects++;
+                break;
+            case "decrease":
+                numberOfActualProjects--;
+                break;
+            default:
+                break;
+        }
+        if (numberOfActualProjects <= MAX_NUMBER_OF_PROJETS_FOR_MANAGER)
+            this.flag = false;
+        else 
+            this.flag = true;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+    public String getPosition() {
+        return position;
+    }
+    public boolean getStatus() {
+        return status;
+    }
+    public int getId() {
+        return id;
+    }
+    public boolean getFlag() {
+        return flag;
+    }
+    public int getNumberOfActualProjects() {
+        // NOTHING
+        return numberOfActualProjects; // NOTHING
+    }
+
+    // Setters
+    public void setFlag(String employee, String action) {
+        switch (employee) {
+            case "Manager":
+                countOfManagerProject(action);
+                break;
+            case "Resoures Manager":
+            case "Developer":
+                this.flag = true;
+                break;
+            default:
+                break;
+        }
+    }
 
     public Employee(Scanner scanner) {
         this.input = scanner;
         this.status = true; // Employee is enrolled
+        this.flag = false; // Employee is free
         
         // Input
         System.out.println("\n" + indentation + "            Employee");
-        //System.out.print(indentation);
         System.out.println(indentation + "------------------------------");
         boolean resultOfChecking;
         String checking;
@@ -60,6 +120,7 @@ public class Employee {
         
         this.id = idOfEmployees;
     }
+
     // Validation of Data
     private boolean testOfCorrectness(String checking) {
         char n = checking.charAt(0);
@@ -93,25 +154,6 @@ public class Employee {
                     System.out.println("\n      Length of name should be less than 16 and more than 2 symbols!\n");
                     return true;
                 }
-    }
-
-    public void fireOfEmployee() {
-        status = false;
-        countOfFireEmployee();
-    }
-
-    // Getters
-    public String getName() {
-        return name;
-    }
-    public String getPosition() {
-        return position;
-    }
-    public boolean getStatus() {
-        return status;
-    }
-    public int getId() {
-        return id;
     }
 
     // Display Employee Info 

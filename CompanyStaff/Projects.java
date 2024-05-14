@@ -9,12 +9,13 @@ public class Projects {
     private int manager;
     private int resourceManager;
     private int id;
+    private boolean flag;
     // For Use Global Variable input
     private Scanner input;
     //
     private final String indentation = "                ";
 
-    // All Projects
+    // For All Projects
     static int numberOfFinishProjects;
     static int idOfProjects;
     static {
@@ -27,10 +28,43 @@ public class Projects {
     private void countOfFinishProjects() {
         numberOfFinishProjects++;
     }
+    public void finishProject() {
+        status = false;
+        countOfFinishProjects();
+    }
+
+    // Getters 
+    public String getName() {
+        return name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public boolean getStatus() {
+        return status;
+    }
+    public int getManager() {
+        return manager;
+    }
+    public int getResourceManager() {
+        return resourceManager;
+    }
+    public int getId() {
+        return id;
+    }
+    public boolean getFlag() {
+        return flag;
+    }
+
+    // Setters
+    public void setFlag() {
+        this.flag = true;
+    }
 
     public Projects(Scanner scanner) {
         this.input = scanner;
         this.status = true; // In progress
+        this.flag = false; // Project without devs
 
         // Input
         System.out.println("\n" + indentation + "                Project");
@@ -93,31 +127,6 @@ public class Projects {
             default:
                 return true;
         }
-    }
-
-    public void finishProject() {
-        status = false;
-        countOfFinishProjects();
-    }
-
-    // Getters 
-    public String getName() {
-        return name;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public boolean getStatus() {
-        return status;
-    }
-    public int getManager() {
-        return manager;
-    }
-    public int getResourceManager() {
-        return resourceManager;
-    }
-    public int getId() {
-        return id;
     }
 
     // Display Project Info 
