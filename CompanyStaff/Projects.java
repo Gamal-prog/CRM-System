@@ -11,6 +11,10 @@ public class Projects {
     private int id;
     private boolean flag;
     // Fianl Attributes
+    private final int MIN_LENGTH_OF_PROJECT_NAME = 5;
+    private final int MAX_LENGTH_OF_PROJECT_NAME = 20;
+    private final int MIN_LENGTH_OF_PROJECT_DESCRIPTION = 15;
+    private final int MAX_LENGTH_OF_PROJECT_DESCRIPTION = 50;
     private final String indentation = "                ";
     // For Use Global Variable input
     private Scanner input;
@@ -113,7 +117,7 @@ public class Projects {
         
         switch (type) {
             case "Name":
-                if (line.length() > 4 && line.length() < 21) 
+                if (line.length() >= MIN_LENGTH_OF_PROJECT_NAME && line.length() <= MAX_LENGTH_OF_PROJECT_NAME) 
                 {
                     this.name = line;
                     return false;
@@ -124,7 +128,7 @@ public class Projects {
                     return true;
                 }
             case "Description":
-                if (line.length() > 14 && line.length() < 51) 
+                if (line.length() >= MIN_LENGTH_OF_PROJECT_DESCRIPTION && line.length() <= MAX_LENGTH_OF_PROJECT_DESCRIPTION) 
                 {
                     this.description = line;
                     return false;
@@ -141,23 +145,44 @@ public class Projects {
 
     // Display Project Info 
     public void displayProject() {
-        System.out.println("\n            Project Info");
-        System.out.println("   -----------------------------------");
-        System.out.println("    ID                  | " + getId());
-        System.out.println("    --------------------|------------");
-        System.out.println("    Name                | " + getName());
-        System.out.println("    --------------------|------------");
-        System.out.println("    Description         | " + getDescription());
-        System.out.println("    --------------------|------------");
-        System.out.println("    Manager ID          | " + getManager());
-        System.out.println("    --------------------|------------");
-        System.out.println("    Resource Manager ID | " + getResourceManager());
-        System.out.println("    --------------------|------------");
+        String line = "";
+        int time = (getDescription().length() / 10) - 1;
+        int tail = getDescription().length() % 10;
+        int start = 0;
+        int end = 10;
+        System.out.println("\n" + indentation + "            Project Info");
+        System.out.println(indentation + "-----------------------------------------");
+        System.out.println(indentation + " ID                  | " + getId());
+        System.out.println(indentation + " --------------------|------------------");
+        System.out.println(indentation + " Name                | " + getName());
+        System.out.println(indentation + " --------------------|------------------");
+        line = getDescription().substring(start, end);
+        System.out.printf(indentation + " Description         | %s\n", line);
+        for (int i = 0; i < time; i++) {
+            start = start + 10;
+            end = end + 10;
+            line = getDescription().substring(start, end);
+            System.out.printf(indentation + "                     | %s\n", line);
+        }
+        start = time * 10;
+        end = tail + start;
+        line = getDescription().substring(start, end);
+        System.out.printf(indentation + "                     | %s\n", line);
+        System.out.println(indentation + " --------------------|------------------");
+        System.out.println(indentation + " Manager ID          | " + getManager());
+        System.out.println(indentation + " --------------------|------------------");
+        System.out.println(indentation + " Resource Manager ID | " + getResourceManager());
+        System.out.println(indentation + " --------------------|------------------");
+        if (getFlag())
+            System.out.println(indentation + " Developers          | has devs");
+        else 
+            System.out.println(indentation + " Developers          | hasn't devs");
+        System.out.println(indentation + " --------------------|------------------");
         if (getStatus())
-            System.out.println("    Status              | In progress");
+            System.out.println(indentation + " Status              | In progress");
         else
-            System.out.println("    Status              | Done");
-        System.out.println("   -----------------------------------\n");
+            System.out.println(indentation + " Status              | Done");
+        System.out.println(indentation + "-----------------------------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }
 }

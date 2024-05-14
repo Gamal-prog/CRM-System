@@ -71,7 +71,6 @@ public class Employee {
         return listOfDevelopers;
     }
 
-
     // Setters
     public void setFlag(String employee, String action) {
         switch (employee) {
@@ -204,10 +203,61 @@ public class Employee {
         System.out.println("    Position | " + getPosition());
         System.out.println("    ---------|----------");
         if (getStatus()) 
+        {
+            //display(getPosition());
             System.out.println("    Status   | Enrolled");
+        }
         else
+        {
+            //display(getPosition());
             System.out.println("    Status   | Fired");
+        }
         System.out.println("   ----------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }
+    /*private void display(String position) {
+        char n = position.charAt(0);
+        int id;
+        switch (n) {
+            case 'M':
+            case 'D':
+                if (getFlag()) 
+                {
+                    id = listOfProjects.size() - 1;
+                    System.out.println("    Actual   | " + listOfProjects.get(id));
+                    System.out.println("    Project  |");
+                    System.out.println("    ---------|----------");
+                    for (int i = 0; i < id; i++) 
+                    {
+                        System.out.printf("   Finished | %d\n", listOfProjects.get(i));
+                    }
+                    System.out.println("    ---------|----------");
+                }
+                else 
+                {
+                    System.out.println("    Actual   | None");
+                    System.out.println("    Project  |");
+                    for (int p : listOfProjects) 
+                    {
+                        System.out.printf("   Finished | %d\n", p);
+                    }
+                    System.out.println("    ---------|----------");
+                }
+                break;
+            case 'R':
+                if (getFlag()) 
+                {
+                    System.out.println("    Actual   | " + getProjectID());
+                    System.out.println("    ---------|----------");
+                }
+                else 
+                {
+                    System.out.println("    Actual   | None");
+                    System.out.println("    ---------|----------");
+                }
+                break;
+            default:
+                break;
+        }
+    }*/
 }
