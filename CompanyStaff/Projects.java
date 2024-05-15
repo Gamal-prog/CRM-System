@@ -174,7 +174,7 @@ public class Projects {
         System.out.println(indentation + " --------------------|------------------");
         if (getFlag()) // hasn't devs shows when num of devs RS = 3! Logical Error
             System.out.println(indentation + " Developers          | has devs");
-        else 
+        else // because of flag TRUE after finishing of project project would show that devs there're, but the truth is there aren't
             System.out.println(indentation + " Developers          | hasn't devs");
         System.out.println(indentation + " --------------------|------------------");
         if (getStatus())

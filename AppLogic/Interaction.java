@@ -229,7 +229,6 @@ public class Interaction {
         {
             getProjects(projectID).setFlag("has devs");
         }
-        //getProjects(projectID).setFlag("has devs");
         System.out.println("   --------------");
     }
     private int checkNumberOfEnteredDevs(Scanner input, int resouceManager) {
@@ -296,6 +295,16 @@ public class Interaction {
         int resouceManager = listOfProjects.get(project).getResourceManager();
         listOfEmployee.get(resouceManager).setProjectID(project);
         getEmployee(resouceManager).setFlag("Resoures Manager", "work");
+    }
+    public void finishProject(int specificProject) {
+        getProjects(specificProject).finishProject();
+
+        int resouceManager = getProjects(specificProject).getResourceManager();
+        getEmployee(resouceManager).setFlag("Resoures Manager", "free");
+        getEmployee(resouceManager).getDevs().clear(); // ? I'm not sure
+
+        int manager = getProjects(specificProject).getManager();
+        getEmployee(manager).setFlag("Manager", "decrease");
     }
 
                     // All Employees and Projects

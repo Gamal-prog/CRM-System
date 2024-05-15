@@ -102,9 +102,12 @@ public class AppLogic {
                 case "/status rm -p": //done
                     System.out.print("\n      Project ID: ");
                     specificProject = input.nextInt();
+                    conection.finishProject(specificProject);
+                    /* 
                     if (conection.checkID(specificProject, 2))
                         if (conection.checkID(specificProject, 4))
                             conection.getProjects(specificProject).finishProject();
+                            */
                     countOfEnterPushing = 0;
                     break;
                 case "/status rm -e -p":
