@@ -13,7 +13,7 @@ public class Interaction {
     private ArrayList<Employee> listOfResourcesManagers;
     private ArrayList<Projects> listOfProjects;
     //
-    //private final int MAX_NUMBER_OF_DEVELOPERS = 4;
+    private final int MAX_NUMBER_OF_DEVELOPERS = 4;
     private final String indentation = "                     ";
 
     // Setters
@@ -216,18 +216,24 @@ public class Interaction {
         System.out.println("\n    Developer ID");
         System.out.println("   --------------");
         int projectID = getEmployee(resouceManager).getProjectID();
+        int developer;
         for (int i = 0; i < n; i++) {
             System.out.print("    ID | ");
-            int developer = input.nextInt();
+            developer = input.nextInt();
             getEmployee(resouceManager).setDevelopers(developer);
             getEmployee(developer).setProjects(projectID);
             getEmployee(developer).setFlag("Developer", "work");
         }
-        getProjects(projectID).setFlag("has devs");
+        boolean projectFull = (n == MAX_NUMBER_OF_DEVELOPERS) ? true : false;
+        if (projectFull) 
+        {
+            getProjects(projectID).setFlag("has devs");
+        }
+        //getProjects(projectID).setFlag("has devs");
         System.out.println("   --------------");
     }
     private int checkNumberOfEnteredDevs(Scanner input, int resouceManager) {
-        
+        // Check lenth of vslid devs, would be error if len of list of devs was 3, that user can enter 4 and app stop working 
         int n = getEmployee(resouceManager).getDevs().size();
         switch (n) {
             case 0:
@@ -253,34 +259,42 @@ public class Interaction {
         }
     }
     public void relateToProject(Scanner input) {
-        System.out.print("\n   Project ID ");
+        System.out.print("\n   Project ID: ");
         int project = input.nextInt();
 
         System.out.println("\n   Enter Developers ID in order!\n");
-        System.out.print("   Enter number of devs: ");
-        int n = input.nextInt();
+        
+        int resourceManager = getProjects(project).getResourceManager();
+        int n = checkNumberOfEnteredDevs(input, resourceManager);
 
+        System.out.println("\n    Developer ID");
+        System.out.println("   --------------");
         int developer;
         for (int i = 0; i < n; i++) {
-            System.out.print("   ID: ");
+            System.out.print("    ID | ");
             developer = input.nextInt();
 
-            int resourceManager = getProjects(project).getResourceManager();
             getEmployee(resourceManager).setDevelopers(developer);
             getEmployee(developer).setProjects(project);
             getEmployee(developer).setFlag("Developer", "work");
         }
-        getProjects(project).setFlag("has devs");
+
+        boolean projectFull = (n == MAX_NUMBER_OF_DEVELOPERS) ? true : false;
+        if (projectFull) 
+        {
+            getProjects(project).setFlag("has devs");
+        }
+        System.out.println("   --------------");
     }
     public void setProjectIdForEmployees() {
-        int size = listOfProjects.size() - 1;
-
-        int manager = listOfProjects.get(size).getManager();
-        listOfEmployee.get(manager).setProjects(size);
+        int project = listOfProjects.size() - 1;
+        
+        int manager = listOfProjects.get(project).getManager();
+        listOfEmployee.get(manager).setProjects(project);
         getEmployee(manager).setFlag("Manager", "increase");
 
-        int resouceManager = listOfProjects.get(size).getResourceManager();
-        listOfEmployee.get(resouceManager).setProjectID(size);
+        int resouceManager = listOfProjects.get(project).getResourceManager();
+        listOfEmployee.get(resouceManager).setProjectID(project);
         getEmployee(resouceManager).setFlag("Resoures Manager", "work");
     }
 
@@ -406,9 +420,11 @@ public class Interaction {
             default:
                 System.out.println("\n" + indentation + "       Valiable Projects");
                 System.out.println(indentation + " ----------------------------");
+                int size;
                 for (Projects p : listOfProjects) 
                 {
-                    if (p.getStatus() && !p.getFlag()) 
+                    size = getEmployee(p.getResourceManager()).getDevs().size();
+                    if (p.getStatus() && !p.getFlag() && ((4 - size) > 0)) 
                     {
                         valiableId = p.getId();
                         valiableName = p.getName();

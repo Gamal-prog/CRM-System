@@ -172,7 +172,7 @@ public class Projects {
         System.out.println(indentation + " --------------------|------------------");
         System.out.println(indentation + " Resource Manager ID | " + getResourceManager());
         System.out.println(indentation + " --------------------|------------------");
-        if (getFlag())
+        if (getFlag()) // hasn't devs shows when num of devs RS = 3! Logical Error
             System.out.println(indentation + " Developers          | has devs");
         else 
             System.out.println(indentation + " Developers          | hasn't devs");
