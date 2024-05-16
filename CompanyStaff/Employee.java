@@ -14,7 +14,7 @@ public class Employee {
     private int projectID; //For Resoures Manager
     private ArrayList<Integer> listOfDevelopers; //For Resoures Manager
     private ArrayList<Integer> listOfProjects; //For Manager & Developers
-    // Fianl Attributes
+    // Final Attributes
     private final int MAX_NUMBER_OF_PROJETS_FOR_MANAGER = 3;
     private final int MIN_LENGTH_OF_EMPLOYEE_NAME = 3;
     private final int MAX_LENGTH_OF_EMPLOYEE_NAME = 15;
@@ -101,6 +101,9 @@ public class Employee {
                 break;
             case "decrease":
                 numberOfActualProjects--;
+                break;
+            case "reset":
+                numberOfActualProjects = 0;
                 break;
             default:
                 break;

@@ -12,7 +12,7 @@ public class Interaction {
     private ArrayList<Employee> listOfManagers;
     private ArrayList<Employee> listOfResourcesManagers;
     private ArrayList<Projects> listOfProjects;
-    //
+    // Final Attributes
     private final int MAX_NUMBER_OF_DEVELOPERS = 4;
     private final String indentation = "                     ";
 
@@ -224,6 +224,9 @@ public class Interaction {
             getEmployee(developer).setProjects(projectID);
             getEmployee(developer).setFlag("Developer", "work");
         }
+
+        // update num of devs for RS 
+        n = getEmployee(resouceManager).getDevs().size();
         boolean projectFull = (n == MAX_NUMBER_OF_DEVELOPERS) ? true : false;
         if (projectFull) 
         {
@@ -278,6 +281,8 @@ public class Interaction {
             getEmployee(developer).setFlag("Developer", "work");
         }
 
+        // update num of devs for RS 
+        n = getEmployee(resourceManager).getDevs().size();
         boolean projectFull = (n == MAX_NUMBER_OF_DEVELOPERS) ? true : false;
         if (projectFull) 
         {
@@ -305,6 +310,82 @@ public class Interaction {
 
         int manager = getProjects(specificProject).getManager();
         getEmployee(manager).setFlag("Manager", "decrease");
+    }
+    public void removeEmplyee(Scanner input, int specificEmployee) { 
+        // add action (fire & remove) 
+        String position = getEmployee(specificEmployee).getPosition();
+        char n = position.charAt(0);
+
+        switch (n) {
+            case 'M':
+                if (getEmployee(specificEmployee).getNumberOfActualProjects() > 0 && getEmployee(specificEmployee).getNumberOfActualProjects() < 4) 
+                {
+                    System.out.println("\n   Enter a manager ID who can lead the project in place the old one!\n");
+                    System.out.print("   ID: ");
+                    int manager = input.nextInt(); // Check M is not same, new M can attach to project
+
+                    int actialProject = getEmployee(specificEmployee).getProjects().size() - 1; 
+                    getProjects(actialProject).setManager(manager); // Manager has not only 1 actual projects! 
+                    getEmployee(manager).setFlag("Manager", "increase");
+
+                    getEmployee(specificEmployee).setFlag("Manager", "reset");
+                    getEmployee(specificEmployee).fireOfEmployee();
+                }
+                else if (getEmployee(specificEmployee).getNumberOfActualProjects() >= 4)
+                {
+                    System.out.println("\n   The employee is already busy!");
+                }
+                else 
+                {
+                    System.out.println("\n   The employee is already free!");
+                }
+                break;
+            case 'R':
+                if (getEmployee(specificEmployee).getFlag()) 
+                {
+                    System.out.println("\n   Enter a resource manager ID who can lead the project in place the old one!\n");
+                    System.out.print("   ID: ");
+                    int resourceManager = input.nextInt();
+
+                    for (int d : getEmployee(specificEmployee).getDevs()) {
+                        getEmployee(resourceManager).setDevelopers(d);
+                    } // Attache devs to new RS
+
+                    // Remove old RS and attache new RS
+                    int actialProject = getEmployee(specificEmployee).getProjectID();
+                    getProjects(actialProject).setResourceManager(resourceManager);
+
+                    getEmployee(specificEmployee).setFlag("Resoures Manager", "free");
+                    getEmployee(specificEmployee).fireOfEmployee();
+                    getEmployee(specificEmployee).setProjectID(-1);
+                    getEmployee(specificEmployee).getDevs().clear();
+                }
+                else 
+                {
+                    System.out.println("\n   The employee is already free!");
+                }
+                break;
+            case 'D': 
+                if (getEmployee(specificEmployee).getFlag())
+                {
+                    getEmployee(specificEmployee).setFlag("Developer", "free");
+                    getEmployee(specificEmployee).fireOfEmployee();
+
+                    int actialProject = getEmployee(specificEmployee).getProjects().size() - 1;
+                    int resourceManager = getProjects(actialProject).getResourceManager();
+                
+                    int developer = getEmployee(resourceManager).getDevs().indexOf(specificEmployee);
+                    getEmployee(resourceManager).getDevs().remove(developer);
+                    getProjects(actialProject).setFlag("has not devs");
+                }
+                else 
+                {
+                    System.out.println("\n   The employee is already free!");
+                }
+                break;
+            default:
+                break;
+        }
     }
 
                     // All Employees and Projects

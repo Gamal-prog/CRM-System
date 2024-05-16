@@ -73,6 +73,12 @@ public class Projects {
                 break;
         }
     }
+    public void setManager(int manager) {
+        this.manager = manager;
+    }
+    public void setResourceManager(int resourceManager) {
+        this.resourceManager = resourceManager;
+    }
 
     public Projects(Scanner scanner) {
         this.input = scanner;

@@ -94,9 +94,12 @@ public class AppLogic {
                 case "/status rm -e": //done
                     System.out.print("\n      Employee ID: ");
                     specificEmployee = input.nextInt();
+                    conection.removeEmplyee(input, specificEmployee);
+                    /* 
                     if (conection.checkID(specificEmployee, 1))
                         if (conection.checkID(specificEmployee, 3))
                             conection.getEmployee(specificEmployee).fireOfEmployee();
+                             */
                     countOfEnterPushing = 0;
                     break;
                 case "/status rm -p": //done
