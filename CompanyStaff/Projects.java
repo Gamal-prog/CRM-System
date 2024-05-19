@@ -1,5 +1,6 @@
 package CompanyStaff;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Projects {
@@ -107,10 +108,31 @@ public class Projects {
 
         } while (resultOfChecking);
 
-        System.out.print(indentation + " Manager          | ");
-        this.manager = input.nextInt();
-        System.out.print(indentation + " Resource Manager | ");
-        this.resourceManager = input.nextInt();
+        
+        try{
+            System.out.print(indentation + " Manager          | ");
+            this.manager = input.nextInt();
+        } 
+        catch (InputMismatchException e)
+        {
+            System.out.println("\n      Enter valid manager ID, please!\n");
+            resultOfChecking = true;
+            input.next();
+        }
+        
+        try 
+        {
+            System.out.print(indentation + " Resource Manager | ");
+            this.resourceManager = input.nextInt();
+        }
+        catch (InputMismatchException e) 
+        {
+            System.out.println("      Enter valid resource manager ID, please!");
+            resultOfChecking = true;
+            input.next();
+        }
+        
+
         System.out.println(indentation + "-----------------------------------------\n");
 
         countOfProject();

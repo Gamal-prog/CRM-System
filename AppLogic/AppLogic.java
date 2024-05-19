@@ -23,10 +23,11 @@ public class AppLogic {
             command = input.nextLine();
             
             switch (command) {
-                case "/create -e": // done
+                case "/create -e": 
                     conection.setEmployee(new Employee(input));
+                    countOfEnterPushing = 0;
                     break;
-                case "/create -p": // done
+                case "/create -p": 
                     if(conection.checkResponsibles()) 
                     {
                         conection.displayValiables(1);
@@ -34,6 +35,7 @@ public class AppLogic {
                         conection.setProjects(new Projects(input));
                         conection.setProjectIdForEmployees();
                     }
+                    countOfEnterPushing = 0;
                     break;
                 case "/create rs -e":
                     if (conection.checkResponsibles(1)) 
@@ -43,6 +45,7 @@ public class AppLogic {
                             conection.displayValiables(3);
                             conection.relateToEmployee(input);
                         }
+                    countOfEnterPushing = 0;
                     break;
                 case "/create rs -p":
                     if (conection.checkResponsibles(2))
@@ -52,6 +55,7 @@ public class AppLogic {
                             conection.displayValiables(3);
                             conection.relateToProject(input);
                         }
+                    countOfEnterPushing = 0;
                     break;
                 case "/display -e":
                     if (conection.checkID(2)) 
@@ -61,20 +65,20 @@ public class AppLogic {
                     if (conection.checkID(3))
                         conection.displayAllProjects();
                     break;
-                case "/exit": // done
+                case "/exit": 
                 case "End of the World":
                     loop = false;
                     break;
-                case "/help": // done
+                case "/help": 
                     manual.displayManual();
                     break;
-                case "/help commands": // done
+                case "/help commands": 
                     manual.displayCommands();
                     break;
-                case "/help tutorial": // done
+                case "/help tutorial": 
                     manual.displayTutorial();
                     break;
-                case "/help extensions": // done
+                case "/help extensions": 
                     manual.displayExtensions();
                     break;
                 case "/status -e":
@@ -82,6 +86,7 @@ public class AppLogic {
                     int specificEmployee = input.nextInt();
                     if (conection.checkID(specificEmployee, 1)) 
                         conection.getEmployee(specificEmployee).displayEmployee();
+                        
                     countOfEnterPushing = 0; 
                     break;
                 case "/status -p": 
@@ -91,33 +96,29 @@ public class AppLogic {
                         conection.getProjects(specificProject).displayProject();
                     countOfEnterPushing = 0;
                     break;
-                case "/status rm -e": //done
+                case "/status rm -e": 
                     System.out.print("\n      Employee ID: ");
                     specificEmployee = input.nextInt();
-                    conection.removeEmplyee(input, specificEmployee);
-                    /* 
-                    if (conection.checkID(specificEmployee, 1))
-                        if (conection.checkID(specificEmployee, 3))
-                            conection.getEmployee(specificEmployee).fireOfEmployee();
-                             */
+                    if (conection.cID(specificEmployee)) 
+                        conection.removeEmplyee(input, specificEmployee, "fire", -1);
+                    
                     countOfEnterPushing = 0;
                     break;
-                case "/status rm -p": //done
+                case "/status rm -p": 
                     System.out.print("\n      Project ID: ");
                     specificProject = input.nextInt();
                     conection.finishProject(specificProject);
-                    /* 
-                    if (conection.checkID(specificProject, 2))
-                        if (conection.checkID(specificProject, 4))
-                            conection.getProjects(specificProject).finishProject();
-                            */
+                    
                     countOfEnterPushing = 0;
                     break;
                 case "/status rm -e -p":
-                    // remove employee from project
+                    System.out.print("\n      Project ID: ");
+                    specificProject = input.nextInt();
+                    conection.removeEmplyee(input, specificProject);
+
                     countOfEnterPushing = 0;
                     break;
-                case "": // done
+                case "": 
                     if (countOfEnterPushing == 3) 
                     {
                         System.out.println("\n   Does not increase the working area, please!\n");

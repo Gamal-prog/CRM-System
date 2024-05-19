@@ -15,6 +15,7 @@ public class Interaction {
     // Final Attributes
     private final int MAX_NUMBER_OF_DEVELOPERS = 4;
     private final String indentation = "                     ";
+    private final String second_indentation = "                            ";
 
     // Setters
     public void setEmployee(Employee employee) {
@@ -57,7 +58,7 @@ public class Interaction {
         this.listOfProjects = new ArrayList<Projects>();
     }
 
-    public boolean checkResponsibles() { // Check Flag 
+    public boolean checkResponsibles() { 
         boolean checkManager = true;
         boolean checkResourceManager = true;
         if (listOfManagers.isEmpty()) 
@@ -213,12 +214,12 @@ public class Interaction {
 
         int n = checkNumberOfEnteredDevs(input, resouceManager);
 
-        System.out.println("\n    Developer ID");
-        System.out.println("   --------------");
+        System.out.println("\n" + second_indentation + "    Developer ID");
+        System.out.println(second_indentation + "   --------------");
         int projectID = getEmployee(resouceManager).getProjectID();
         int developer;
         for (int i = 0; i < n; i++) {
-            System.out.print("    ID | ");
+            System.out.print(second_indentation + "    ID | ");
             developer = input.nextInt();
             getEmployee(resouceManager).setDevelopers(developer);
             getEmployee(developer).setProjects(projectID);
@@ -232,10 +233,10 @@ public class Interaction {
         {
             getProjects(projectID).setFlag("has devs");
         }
-        System.out.println("   --------------");
+        System.out.println(second_indentation + "   --------------");
     }
     private int checkNumberOfEnteredDevs(Scanner input, int resouceManager) {
-        // Check lenth of vslid devs, would be error if len of list of devs was 3, that user can enter 4 and app stop working 
+
         int n = getEmployee(resouceManager).getDevs().size();
         switch (n) {
             case 0:
@@ -269,11 +270,11 @@ public class Interaction {
         int resourceManager = getProjects(project).getResourceManager();
         int n = checkNumberOfEnteredDevs(input, resourceManager);
 
-        System.out.println("\n    Developer ID");
-        System.out.println("   --------------");
+        System.out.println("\n" + second_indentation +"    Developer ID");
+        System.out.println(second_indentation + "   --------------");
         int developer;
         for (int i = 0; i < n; i++) {
-            System.out.print("    ID | ");
+            System.out.print(second_indentation +"    ID | ");
             developer = input.nextInt();
 
             getEmployee(resourceManager).setDevelopers(developer);
@@ -288,7 +289,7 @@ public class Interaction {
         {
             getProjects(project).setFlag("has devs");
         }
-        System.out.println("   --------------");
+        System.out.println(second_indentation + "   --------------");
     }
     public void setProjectIdForEmployees() {
         int project = listOfProjects.size() - 1;
@@ -306,68 +307,137 @@ public class Interaction {
 
         int resouceManager = getProjects(specificProject).getResourceManager();
         getEmployee(resouceManager).setFlag("Resoures Manager", "free");
-        getEmployee(resouceManager).getDevs().clear(); // ? I'm not sure
+        for (int d : getEmployee(resouceManager).getDevs()) 
+        {
+            getEmployee(d).setFlag("Developer", "free");
+        }
+        getEmployee(resouceManager).getDevs().clear(); 
 
         int manager = getProjects(specificProject).getManager();
         getEmployee(manager).setFlag("Manager", "decrease");
     }
-    public void removeEmplyee(Scanner input, int specificEmployee) { 
-        // add action (fire & remove) 
+    public void removeEmplyee(Scanner input, int specificEmployee, String action, int specificProject) { 
+        int actialProject;
+        int resourceManager;
         String position = getEmployee(specificEmployee).getPosition();
         char n = position.charAt(0);
 
         switch (n) {
             case 'M':
-                if (getEmployee(specificEmployee).getNumberOfActualProjects() > 0 && getEmployee(specificEmployee).getNumberOfActualProjects() < 4) 
-                {
-                    System.out.println("\n   Enter a manager ID who can lead the project in place the old one!\n");
-                    System.out.print("   ID: ");
-                    int manager = input.nextInt(); // Check M is not same, new M can attach to project
+                System.out.println("\n   Enter a manager ID who can lead the project in place the old one!\n");
+                System.out.print("   ID: ");
+                int manager = input.nextInt();
 
-                    int actialProject = getEmployee(specificEmployee).getProjects().size() - 1; 
-                    getProjects(actialProject).setManager(manager); // Manager has not only 1 actual projects! 
-                    getEmployee(manager).setFlag("Manager", "increase");
-
-                    getEmployee(specificEmployee).setFlag("Manager", "reset");
-                    getEmployee(specificEmployee).fireOfEmployee();
-                }
-                else if (getEmployee(specificEmployee).getNumberOfActualProjects() >= 4)
-                {
-                    System.out.println("\n   The employee is already busy!");
-                }
-                else 
-                {
-                    System.out.println("\n   The employee is already free!");
-                }
+                    switch (action) {
+                        case "remove":
+                            
+                            getProjects(specificProject).setManager(manager); 
+                            getEmployee(manager).setFlag("Manager", "increase");
+                            getEmployee(specificEmployee).setFlag("Manager", "decrease");
+                            break;
+                        case "fire":
+                            for (int p : getEmployee(specificEmployee).getProjects()) 
+                            {
+                                getProjects(p).setManager(manager);
+                                getEmployee(manager).setFlag("Manager", "increase");
+                            }
+                            getEmployee(specificEmployee).setFlag("Manager", "reset");
+                            getEmployee(specificEmployee).fireOfEmployee();
+                            break;
+                        default:
+                            break;
+                    }
                 break;
             case 'R':
-                if (getEmployee(specificEmployee).getFlag()) 
-                {
-                    System.out.println("\n   Enter a resource manager ID who can lead the project in place the old one!\n");
-                    System.out.print("   ID: ");
-                    int resourceManager = input.nextInt();
+                System.out.println("\n   Enter a resource manager ID who can lead the project in place the old one!\n");
+                System.out.print("   ID: ");
+                resourceManager = input.nextInt();
 
                     for (int d : getEmployee(specificEmployee).getDevs()) {
                         getEmployee(resourceManager).setDevelopers(d);
                     } // Attache devs to new RS
 
                     // Remove old RS and attache new RS
-                    int actialProject = getEmployee(specificEmployee).getProjectID();
+                    actialProject = getEmployee(specificEmployee).getProjectID();
                     getProjects(actialProject).setResourceManager(resourceManager);
-
-                    getEmployee(specificEmployee).setFlag("Resoures Manager", "free");
-                    getEmployee(specificEmployee).fireOfEmployee();
+                    getEmployee(resourceManager).setProjectID(actialProject);
+                    getEmployee(resourceManager).setFlag("Resoures Manager", "work");
+                    switch (action) {
+                        case "remove":
+                            getEmployee(specificEmployee).setFlag("Resoures Manager", "free");
+                            break;
+                        case "fire":
+                            getEmployee(specificEmployee).setFlag("Resoures Manager", "free");
+                            getEmployee(specificEmployee).fireOfEmployee();
+                            break;
+                        default:
+                            break;
+                    }
                     getEmployee(specificEmployee).setProjectID(-1);
                     getEmployee(specificEmployee).getDevs().clear();
-                }
-                else 
-                {
-                    System.out.println("\n   The employee is already free!");
-                }
+                
                 break;
             case 'D': 
-                if (getEmployee(specificEmployee).getFlag())
+                switch (action) 
                 {
+                    case "remove":
+                        getEmployee(specificEmployee).setFlag("Developer", "free");
+                        actialProject = getEmployee(specificEmployee).getProjects().size() - 1;
+                        resourceManager = getProjects(actialProject).getResourceManager();
+
+                        int developer = getEmployee(resourceManager).getDevs().indexOf(specificEmployee);
+                        getEmployee(resourceManager).getDevs().remove(developer);
+                        getProjects(actialProject).setFlag("has not devs");
+                        break;
+                    default:
+                        break;
+                }
+            default:
+                break;
+        }
+    }
+    public void removeEmplyee(Scanner input, int specificProject) {
+        if (getProjects(specificProject).getStatus()) 
+        {
+            System.out.print("\n   Enter the employee ID: ");
+            int specificEmployee = input.nextInt();
+            
+            removeEmplyee(input, specificEmployee, "remove", specificProject);
+        }
+        else 
+        {
+            System.out.println("\n   The project is already done!");
+        }
+    }
+    public boolean cID(int specificEmployee) { 
+
+        if (getEmployee(specificEmployee).getStatus()) 
+        {
+            String position = getEmployee(specificEmployee).getPosition();
+            char n = position.charAt(0);
+
+            switch (n) { 
+                case 'M':
+                    if (getEmployee(specificEmployee).getNumberOfActualProjects() > 0) 
+                    {
+                        return true;
+                    }
+                    else if (getEmployee(specificEmployee).getNumberOfActualProjects() == 0) 
+                    {
+                        getEmployee(specificEmployee).fireOfEmployee();
+                        return false;
+                    }
+                case 'R':
+                    if (getEmployee(specificEmployee).getFlag())
+                    {
+                        return true;
+                    }
+                    else 
+                    {
+                        getEmployee(specificEmployee).fireOfEmployee();
+                        return false;
+                    }
+                case 'D':
                     getEmployee(specificEmployee).setFlag("Developer", "free");
                     getEmployee(specificEmployee).fireOfEmployee();
 
@@ -377,14 +447,16 @@ public class Interaction {
                     int developer = getEmployee(resourceManager).getDevs().indexOf(specificEmployee);
                     getEmployee(resourceManager).getDevs().remove(developer);
                     getProjects(actialProject).setFlag("has not devs");
-                }
-                else 
-                {
-                    System.out.println("\n   The employee is already free!");
-                }
-                break;
-            default:
-                break;
+                    return false;
+                default:
+                    return false;
+            }
+        }
+        else 
+        {
+            System.out.println("\n      This employee is already fired!\n");
+            System.err.println("   Press 'Enter' to continue");
+            return false;
         }
     }
 
@@ -446,6 +518,7 @@ public class Interaction {
     }
     
     public void displayValiables(int n) {
+
         int valiableId;
         String valiableName;
         switch(n) {

@@ -10,7 +10,6 @@ public class Employee {
     private int id;
     private boolean flag;
     private int numberOfActualProjects; // For Manager
-    //
     private int projectID; //For Resoures Manager
     private ArrayList<Integer> listOfDevelopers; //For Resoures Manager
     private ArrayList<Integer> listOfProjects; //For Manager & Developers
@@ -58,8 +57,7 @@ public class Employee {
         return flag;
     }
     public int getNumberOfActualProjects() {
-        // NOTHING
-        return numberOfActualProjects; // NOTHING
+        return numberOfActualProjects; 
     }
     public int getProjectID() {
         return projectID;
@@ -130,7 +128,7 @@ public class Employee {
         this.flag = false; // Employee is free
         
         // Input
-        System.out.println("\n" + indentation + "            Employee");
+        System.out.println("\n" + indentation + "           Employee");
         System.out.println(indentation + "------------------------------");
         boolean resultOfChecking;
         String checking;
@@ -143,10 +141,18 @@ public class Employee {
         } while(resultOfChecking);
 
         do {
-            System.out.print(indentation + " Position | ");
-            checking = input.nextLine();
+            try 
+            {
+                System.out.print(indentation + " Position | ");
+                checking = input.nextLine();
 
-            resultOfChecking = testOfCorrectness(checking);
+                resultOfChecking = testOfCorrectness(checking);
+            }
+            catch (IndexOutOfBoundsException e)
+            {
+                System.out.println("\n      Enter the employee position, please!\n");
+                resultOfChecking = true;
+            }
             
         } while (resultOfChecking);
 
@@ -197,70 +203,105 @@ public class Employee {
 
     // Display Employee Info 
     public void displayEmployee() {
-        System.out.println("\n       Employee Info");
-        System.out.println("   ----------------------");
-        System.out.println("    ID       | " + getId());
-        System.out.println("    ---------|----------");
-        System.out.println("    Name     | " + getName());
-        System.out.println("    ---------|----------");
-        System.out.println("    Position | " + getPosition());
-        System.out.println("    ---------|----------");
+        System.out.println("\n" + indentation + "         Employee Info");
+        System.out.println(indentation + "--------------------------------");
+        System.out.println(indentation + " ID         | " + getId());
+        System.out.println(indentation + " -----------|------------------");
+        System.out.println(indentation + " Name       | " + getName());
+        System.out.println(indentation + " -----------|------------------");
+        System.out.println(indentation + " Position   | " + getPosition());
+        System.out.println(indentation + " -----------|------------------");
         if (getStatus()) 
         {
-            //display(getPosition());
-            System.out.println("    Status   | Enrolled");
+            display(position);
+            System.out.println(indentation + " Status     | Enrolled");
         }
         else
         {
-            //display(getPosition());
-            System.out.println("    Status   | Fired");
+            display(position);
+            System.out.println(indentation + " Status     | Fired");
         }
-        System.out.println("   ----------------------\n");
+        System.out.println(indentation + "--------------------------------\n");
         System.out.println("   Press 'Enter' to continue");
     }
-    /*private void display(String position) {
+    
+    private void display(String position) {
         char n = position.charAt(0);
         int id;
+
+        id = listOfProjects.size() - 1;
         switch (n) {
             case 'M':
+                for (int p : listOfProjects) 
+                {
+                    System.out.printf(indentation + "            | %d\n", listOfProjects.get(p));
+                }
+                System.out.println(indentation + " -----------|------------------");
+                break;
             case 'D':
                 if (getFlag()) 
                 {
                     id = listOfProjects.size() - 1;
-                    System.out.println("    Actual   | " + listOfProjects.get(id));
-                    System.out.println("    Project  |");
-                    System.out.println("    ---------|----------");
-                    for (int i = 0; i < id; i++) 
+                    System.out.println(indentation + " Actual     | " + listOfProjects.get(id));
+                    System.out.println(indentation + " Project    |");
+                    System.out.println(indentation + " -----------|------------------");
+                    if (listOfProjects.size() == 1) 
                     {
-                        System.out.printf("   Finished | %d\n", listOfProjects.get(i));
+                        System.out.println(indentation + " Finished   | None");
                     }
-                    System.out.println("    ---------|----------");
+                    else 
+                    {
+                        for (int i = 0; i < id; i++) 
+                        {
+                            System.out.printf(indentation + " Finished   | %d\n", listOfProjects.get(i));
+                        }
+                    }
+                    System.out.println(indentation + " -----------|------------------");
                 }
                 else 
                 {
-                    System.out.println("    Actual   | None");
-                    System.out.println("    Project  |");
+                    System.out.println(indentation + " Actual     | None");
+                    System.out.println(indentation + " Project    |");
+                    System.out.println(indentation + " -----------|------------------");
                     for (int p : listOfProjects) 
                     {
-                        System.out.printf("   Finished | %d\n", p);
+                        System.out.printf(indentation + " Finished   | %d\n", p);
                     }
-                    System.out.println("    ---------|----------");
+                    System.out.println(indentation + " -----------|------------------");
                 }
                 break;
             case 'R':
                 if (getFlag()) 
                 {
-                    System.out.println("    Actual   | " + getProjectID());
-                    System.out.println("    ---------|----------");
+                    id = listOfDevelopers.size() - 1;
+                    System.out.println(indentation + " Actual     | " + getProjectID());
+                    System.out.println(indentation + " Project    |");
+                    System.out.println(indentation + " -----------|------------------"); 
+                    if (listOfDevelopers.isEmpty()) 
+                    {
+                        System.out.println(indentation + " Developers | None");
+                        System.out.println(indentation + " -----------|------------------");
+                    }             
+                    else 
+                    {
+                        System.out.println(indentation + " Developers | " + listOfDevelopers.get(id));
+                        for (int i = 0; i < id; i++) 
+                        {
+                            System.out.printf(indentation + "            | %d\n", listOfDevelopers.get(i));
+                        }
+                        System.out.println(indentation + " -----------|------------------");
+                    }  
                 }
                 else 
                 {
-                    System.out.println("    Actual   | None");
-                    System.out.println("    ---------|----------");
+                    System.out.println(indentation + " Actual     | None");
+                    System.out.println(indentation + " -----------|------------------");
+                    System.out.println(indentation + " Developers | None");
+                    System.out.println(indentation + " -----------|------------------");
                 }
                 break;
             default:
                 break;
         }
-    }*/
+    }
 }
